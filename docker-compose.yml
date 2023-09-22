@@ -2,7 +2,7 @@ version: "3.8"
 
 services:
   blog:
-    image: klakegg/hugo:0.111.3
+    image: klakegg/hugo:0.111.3-ext-ubuntu
     command: server
     volumes:
       - ".:/src"

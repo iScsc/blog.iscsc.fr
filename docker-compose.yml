@@ -1,0 +1,11 @@
+version: "3.8"
+
+services:
+  blog:
+    image: klakegg/hugo:0.111.3
+    command: server
+    volumes:
+      - ".:/src"
+    ports:
+      - "1313:1313"
+

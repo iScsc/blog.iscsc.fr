@@ -3,9 +3,11 @@ version: "3.8"
 services:
   blog:
     image: klakegg/hugo:0.111.3
-    command: server
-    volumes:
-      - ".:/src"
+    command: server --baseUrl $SERVER_NAME
+    restart: unless-stopped
+    environment:
+      - HUGO_ENV=$MODE
     ports:
-      - "1313:1313"
-
+      - 80:1313
+    volumes:
+      - .:/src:ro

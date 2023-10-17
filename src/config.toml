@@ -1,4 +1,3 @@
-baseURL = "https://iscsc.fr/"
 languageCode = "en-us"
 title = "iScsc Blog"
 theme = "poison"

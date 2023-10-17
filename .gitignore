@@ -1,3 +1,8 @@
-*.lock
 .env.prod
 .env.dev
+
+# hugo files
+*.lock
+
+# hugo build
+src/public

@@ -6,3 +6,4 @@
 
 # hugo build
 src/public
+build/blog/*

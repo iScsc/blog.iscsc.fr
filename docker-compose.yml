@@ -1,13 +1,20 @@
 version: "3.8"
 
 services:
-  blog:
-    image: klakegg/hugo:0.111.3
-    command: server --baseUrl $SERVER_NAME
-    restart: unless-stopped
-    environment:
-      - HUGO_ENV=$MODE
-    ports:
-      - 80:1313
+  builder:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: hugo-builder
     volumes:
-      - .:/src:ro
+      - .:/hugo:rw
+  blog:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    ports:
+      - 80:80
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./build/blog:/blog:rw

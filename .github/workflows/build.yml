@@ -12,13 +12,14 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
+      # Checkout repo AND ITS SUBMODULES
+      - name: 🛒 Checkout
         uses: actions/checkout@v3
         with:
           submodules: recursive
-      - name: hugo
-        uses: klakegg/actions-hugo@1.0.0
-        with:
-          source: ./src
-          target: ./build/blog
-          env: production
+
+      # Build the static website with the provided docker-compose rules
+      - name: 🛠️ Build with HUGO
+        run: |
+          docker compose up builder
+

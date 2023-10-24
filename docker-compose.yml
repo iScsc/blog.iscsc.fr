@@ -2,12 +2,17 @@ version: "3.8"
 
 services:
   builder:
-    build:
-      context: .
-      dockerfile: Dockerfile
-      target: hugo-builder
+    image: klakegg/hugo:0.111.3
+    command: --verbose
+    environment:
+      - HUGO_DESTINATION=/build/blog
+      # For maximum backward compatibility with Hugo modules:
+      - HUGO_ENV=production
+      - HUGO_ENVIRONMENT=production
     volumes:
-      - .:/hugo:rw
+      - ./src:/src:rw
+      - ./build/blog:/build/blog:rw
+
   blog:
     build:
       context: .

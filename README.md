@@ -15,10 +15,17 @@ Non-exhaustive TODO-list:
 
 ### Production
 
+Create the blog directory, **it must be writable by the user that will write to it: you, builder target, CI user...**
+```sh
+mkdir build/blog
+chmown <make it writable by the appropriate user/group>
+chmod <make it writable by the appropriate user/group>
+```
+
 > you should check first the consistency of the server name (iscsc.fr/localhost) in those files: `nginx.conf`, ...
 
 Start the nginx container to serve requests:
-```
+```sh
 docker compose build blog
 docker compose up --detach blog
 ```
@@ -27,7 +34,7 @@ docker compose up --detach blog
 
 Then builds the static website, `./build/blog` is a volume shared with both containers so 
 building the website will automatically "update" it for nginx.
-```
+```sh
 docker compose up builder
 ```
 

@@ -5,8 +5,12 @@ on:
   pull_request:
 
   # Runs on push/merge to main to deploy the new website
+  # Only run if the push updates website sources
   push:
-    branches: [main]
+    paths:
+      - src/**
+    branches:
+      - main
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:

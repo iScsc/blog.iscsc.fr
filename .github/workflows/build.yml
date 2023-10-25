@@ -23,3 +23,9 @@ jobs:
         run: |
           docker compose up builder
 
+      # Upload build artifacts for deployment or download
+      - name: 🚀 Upload Artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: build
+          path: ./build/blog

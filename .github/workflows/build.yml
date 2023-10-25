@@ -1,8 +1,12 @@
-name: Build HUGO website
+name: Build and deploy HUGO website
 
 on:
   # Runs on pull requests to check that the website is building without errors
   pull_request:
+
+  # Runs on push/merge to main to deploy the new website
+  push:
+    branches: [main]
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
@@ -29,3 +33,17 @@ jobs:
         with:
           name: build
           path: ./build/blog
+
+  deploy:
+    needs: [build]
+    if: ${{ github.event_name == 'push' }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: 🛠️ Setup build directory
+        run: |
+          mkdir -p build/blog
+      - name: 📥 Download build Artifacts
+        uses: actions/download-artifact@v3
+        with:
+          name: build
+          path: build/blog

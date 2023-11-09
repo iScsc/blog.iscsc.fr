@@ -17,6 +17,53 @@ Non-exhaustive TODO-list:
 
 ### Production
 
+#### Create SSL certification
+
+To set up HTTPS, you will need valid SSL certificates. If you deploy the app for the first time, follow these instructions:
+
+- Comment or delete the whole server section about 443 in the `nginx.conf` file.
+
+```diff
+- server {
+- listen 443 default_server ssl http2;
+- ...
+- }
+```
+
+> This step is required because the certificates don't exist yet, so they cannot be loaded in the nginx configuration.  
+> **The website has to run with http to respond to certbot challenge**
+
+- (Re)Start the `blog` container:
+
+```bash
+docker compose up --detach --build blog
+```
+
+- Create the certificates with the `certbot` container:
+
+```bash
+docker compose run --rm certbot certonly --webroot --webroot-path /var/www/certbot/ -d yourdomainname.com
+```
+
+- Restore the original `nginx.conf` (with `git restore nginx.conf` for example)
+- Stop the `blog` container:
+
+```bash
+docker compose down
+```
+
+The certificates should have been generated in `certbot/conf/live/yourdomainname.com/`.
+
+#### Renew SSL certification
+
+If you just want to renew existing certificates, use:
+
+```bash
+docker compose run --rm certbot renew
+```
+
+#### Deploy the website itself
+
 Create the blog directory, **it must be writable by users that will write to it: you, builder target, CI user...**
 ```sh
 mkdir build/blog

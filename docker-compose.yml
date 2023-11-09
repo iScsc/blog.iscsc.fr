@@ -20,6 +20,15 @@ services:
     restart: unless-stopped
     ports:
       - 80:80
+      - 443:443
     volumes:
+      - ./certbot/www:/var/www/certbot/:ro
+      - ./certbot/conf/:/etc/nginx/ssl/:ro
       - ./nginx.conf:/etc/nginx/nginx.conf:ro
       - ./build/blog:/blog:rw
+
+  certbot:
+    image: certbot/certbot:latest
+    volumes:
+      - ./certbot/www/:/var/www/certbot/:rw
+      - ./certbot/conf/:/etc/letsencrypt/:rw

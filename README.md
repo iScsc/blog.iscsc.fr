@@ -6,10 +6,10 @@ Non-exhaustive TODO-list:
  - [X] fix nginx.conf and run_nginx.sh properly
  - [X] Add automatic deployment on push to src/**
  - [ ] write a workflow warning if the new content is still draft
- - [ ] add https
+ - [X] add https
  - [ ] add posts from previous website
  - [ ] add a comments engine
- - [ ] fix baseUrl and "iScsc" sidebar not redirecting
+ - [X] fix baseUrl and "iScsc" sidebar brand name not redirecting
  - [ ] print a `lastUpdate` or `updated` date param on posts
  - [ ] show posts which `draft` param is `true` in dev mode (if possible)
  - [ ] check when building (with builder target) that git submodule is updated

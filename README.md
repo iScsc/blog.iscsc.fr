@@ -9,6 +9,7 @@ Non-exhaustive TODO-list:
  - [ ] add https
  - [ ] add posts from previous website
  - [ ] add a comments engine
+ - [ ] fix baseUrl and "iScsc" sidebar not redirecting
  - [ ] print a `lastUpdate` or `updated` date param on posts
  - [ ] show posts which `draft` param is `true` in dev mode (if possible)
  - [ ] check when building (with builder target) that git submodule is updated

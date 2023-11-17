@@ -33,5 +33,6 @@ for file_path in sys.argv[1:]:
         data["url"] = f"https://iscsc.fr/posts/{file_name}"
 
         ## Finally send Data
-        requests.post("http://iscsc.fr:8001/new-blog", json=data)
+        req = requests.post("http://iscsc.fr:8001/new-blog", json=data)
         print(file_path, file_name, data)
+        assert(req.status_code == 200)

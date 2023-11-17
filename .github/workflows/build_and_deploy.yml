@@ -72,7 +72,16 @@ jobs:
         run: |
           rsync --archive --stats --verbose --delete ./build/blog/* ${{ secrets.CI_USER_NAME }}@iscsc.fr:${{ secrets.STATIC_WEBSITE_PATH}}
 
-      # Finally notify of the new article (if any) on the iScsc discord server
+  # Finally notify of the new article (if any) on the iScsc discord server
+  notify:
+    needs: [deploy]
+    runs-on: ubuntu-latest
+    steps:
+      # Checkout repo, no need to checkout submodule
+      - name: 🛒 Checkout
+        uses: actions/checkout@v3
+
+      # Get the list of added, changed, removed, and renamed files
       - name: 📑 Get changed files
         uses: jitterbit/get-changed-files@v1
         id: files

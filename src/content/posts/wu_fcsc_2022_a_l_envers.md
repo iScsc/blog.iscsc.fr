@@ -1,7 +1,7 @@
 ---
 title: "Write-up de 'A l'envers' - FSCS 2022"
 summary: "Initiation à Pwntools"
-date: 2024-14-02T20:00:00-02:00
+date: 2024-02-14T20:00:00-02:00
 author: "Thomas Roberge"
 draft: false
 tags: ["write-up","FCSC","programming","pwntools","FR"]

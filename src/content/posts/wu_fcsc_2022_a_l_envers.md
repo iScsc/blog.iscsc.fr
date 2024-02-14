@@ -1,4 +1,9 @@
-# Challenge FSCS 2022 : A l'envers
+---
+title: "Write-up de "A l'envers" - FSCS 2022"
+date: 2024-14-02
+draft: false
+tags: ["write-up","FCSC","programming","pwntools"]
+---
 
 ## Première idée
 Le programme contenu dans le docker nous envoie des mots un par un. Le challenge consiste à lui renvoyer les mots en les inversants. Ma première idée consiste à faire simplement un script pyhton qui renvoie le mot retourné. Mais problème : comment intérargir avec le challenge, ie récupérer les mots qu'il envoie et lui retourner les mots inversés ? En effet, une simple pipe ne suffit pas puisqu'il faut lire plusieurs fois ce qu'envoie le challenge et à chaque fois lui envoyer une réponse.

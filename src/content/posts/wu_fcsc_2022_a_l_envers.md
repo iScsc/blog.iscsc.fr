@@ -1,6 +1,7 @@
 ---
 title: "Write-up de 'A l'envers' - FSCS 2022"
 date: 2024-14-02
+author: Thomas Roberge
 draft: false
 tags: ["write-up","FCSC","programming","pwntools"]
 ---

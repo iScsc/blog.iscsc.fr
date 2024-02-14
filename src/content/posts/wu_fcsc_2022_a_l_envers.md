@@ -1,5 +1,5 @@
 ---
-title: "Write-up de "A l'envers" - FSCS 2022"
+title: "Write-up de 'A l'envers' - FSCS 2022"
 date: 2024-14-02
 draft: false
 tags: ["write-up","FCSC","programming","pwntools"]

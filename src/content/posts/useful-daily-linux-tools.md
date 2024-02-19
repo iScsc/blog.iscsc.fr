@@ -61,12 +61,12 @@ $ tldr chmod
 
 ... (you got it)
 ```
-Now you know every Linux command ;)  
+Now you know every Linux command :wink:  
 You'll never (hmm...) read the `man` or google a command again!
 
 > install it on Ubuntu with `sudo apt install tldr`
 
-> /!\ after installation do not forget to `tldr -u` to update it (`tldr tldr` if you forget it :))) )
+> /!\ after installation do not forget to `tldr -u` to update it (`tldr tldr` if you forget it :upside_down:)
 
 ## beautify your prompt so that you terminal feels like home
 
@@ -97,7 +97,7 @@ Of course there are many other commands/tools that you should use:
  - `git` and `gh`
  - `htop` and `ncdu`
  - `gparted`
- - `bash` :) (:
+ - `bash` :upside_down:
  - [`complete-alias`](https://github.com/cykerway/complete-alias)
  - other prompts
  - a good terminal

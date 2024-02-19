@@ -80,7 +80,7 @@ To publish your post you'll only need one thing: a [GitHub](https://github.com) 
 Once you've created it:
 - go to https://github.com/iScsc/blog.iscsc.fr click on `Fork` on the top-right corner
 - you can let every option by default:  
-![](../1-create-fork.png)
+![](1-create-fork.png)
 - approve by clicking `Create fork`  
 
 
@@ -89,10 +89,10 @@ Congrats! you've created your own copy of the blog!
 #### Upload and Branch
 Now, you should be on `https://github.com/YOUR GITHUB USERNAME/blog.iscsc.fr`, go there if you're not and:
 - click `Add file` then `Upload files`
-![](../2-upload-files.png)
+![](2-upload-files.png)
 
 - then **drag** your new post in the box (or add it with `choose your files`) 
-![](../3-propose-changes.png)
+![](3-propose-changes.png)
 - select `Create a new branch...` (the name don't matter)
 - click `Propose changes`
 
@@ -110,13 +110,13 @@ Now let's create the associated **Pull Request** to finally share your article w
 > **NOTE 2**: if you're interested in why we're doing this, `git` mechanisms (branch, ...) and `GitHub` ones (repos, Pull Requests, Forks), I should right soon a blog post on the [blog](https://iscsc.fr)
 
 Now that your files are uploaded you should see:
-![](../4a1-compare-across-forks.png)
+![](4a1-compare-across-forks.png)
 - click `compare across forks` (under the cursor on the screenshot)
 - then change `base repository` and select `iScsc/blog.iscsc.fr`
-![](../4a2-choose-iscsc-repo.png)
+![](4a2-choose-iscsc-repo.png)
 
 Finally the head banner should look something like:
-![](../4a3-final-merge-diff.png)
+![](4a3-final-merge-diff.png)
 
 
 
@@ -124,12 +124,12 @@ Finally the head banner should look something like:
 > **NOTE**: if you've done the **subsection** `Create PR directly...`'s steps, **skip** this one
 
 - go to https://github.com/iScsc/blog.iscsc.fr you should see: 
-![](../4b-alternative-pr.png)
+![](4b-alternative-pr.png)
 - click `Compare & pull request`
 
 #### Write a good Pull Request
 The hardest part is done, now just fulfill the title and and description of the Pull Request and click `Create Pull Request`
-![](../5-pr-title-description.png)
+![](5-pr-title-description.png)
 
 ## 4- Review
 You've done it!  

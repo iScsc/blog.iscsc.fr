@@ -17,7 +17,6 @@ for file_path in sys.argv[1:]:
             if type(data[key]) not in [int, str, float, bool]:
                 data[key] = str(data[key])
 
-        ## Add URL info:
         # we have to deal with both possibilities of new article:
         # - an article as a .md file which URL is the name
         # - a leaf bundle article (https://gohugo.io/content-management/page-bundles/#leaf-bundles):
@@ -30,6 +29,7 @@ for file_path in sys.argv[1:]:
             # direct article file: name is file name
             file_name = basename[:-3] # get rid of the `.md`
 
+        ## Add URL info:
         data["url"] = f"https://iscsc.fr/posts/{file_name}"
 
         ## Finally send Data

@@ -14,6 +14,11 @@ Non-exhaustive TODO-list:
  - [ ] show posts which `draft` param is `true` in dev mode (if possible)
  - [ ] check when building (with builder target) that git submodule is updated
 
+
+## Features
+- renders emojis https://emojibase.dev/shortcodes/?
+
+
 ## Deployment
 
 ### Production

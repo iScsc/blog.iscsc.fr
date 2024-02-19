@@ -63,7 +63,7 @@ Thus, you only have to build the smallest snapshot that run your application for
 For a python application, you'll need `python` ofc, maybe some dependencies like `pygame` or `requests` or `discordpy` if you're building a Discord Bot!  
 Every other things would be useless garbage for your application!!
 
-Factually, to create `docker` images you write a `Dockerfile` ([[3]](#3-dockerfile-example) to get an example ;) ):
+Factually, to create `docker` images you write a `Dockerfile` ([[3]](#3-dockerfile-example) to get an example :wink:):
  - you base it on a base image (a python image, a debian or ubuntu classically) with the keyword `FROM`.
  - then you create the environment you need, maybe run some commands to create folders, install packages? You'll use the `RUN` keyword!
 - and finally embed your source code with `COPY` copying the files from the *host* (see the *Note* above) to the images.

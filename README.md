@@ -7,11 +7,11 @@ Non-exhaustive TODO-list:
  - [X] Add automatic deployment on push to src/**
  - [ ] write a workflow warning if the new content is still draft
  - [X] add https
- - [ ] add posts from previous website
+ - [X] add posts from previous website
  - [ ] add a comments engine
  - [X] fix baseUrl and "iScsc" sidebar brand name not redirecting
  - [ ] print a `lastUpdate` or `updated` date param on posts
- - [ ] show posts which `draft` param is `true` in dev mode (if possible)
+ - [X] show posts which `draft` param is `true` in dev mode (if possible)
  - [ ] check when building (with builder target) that git submodule is updated
 
 
@@ -108,11 +108,14 @@ Sources I used:
 
 ### Development
 
+> it requires `hugo` [installed](https://gohugo.io/installation/) locally!
 ```sh
 cd src
-hugo server
+hugo server --buildDrafts --buildFuture
 ```
-> it requires `hugo` installed locally!
+> `--buildFuture` is also used in production, `--buildDrafts` only in development  
+> `--buildExpired` can be used too
 
-This will build sources and start a basic development server that listens on http://localhost:1313.  
-The HUGO server automatically watches sources, so if you create a new post while it's running it will automatically rebuild the website and serve the new post.
+This will build sources and start a basic development server that listens on http://localhost:1313.
+
+The HUGO server **automatically watches sources**, so if you create a new post while it's running it will automatically rebuild the website and serve the new post.

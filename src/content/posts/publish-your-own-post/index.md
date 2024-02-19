@@ -73,7 +73,7 @@ You've reached it! The last and final step :)
 > **NOTE**: if you're struggling with GitHub: **don't** give up!  
 > You can contact me on Discord: `ctmbl` or open an [Issue](https://github.com/iScsc/blog.iscsc.fr/issues) on the GitHub repository, I'll happily walk these steps with you!
 
-#### GH Account
+#### GitHub Account
 To publish your post you'll only need one thing: a [GitHub](https://github.com) account, you can create one.
 
 #### Fork
@@ -88,10 +88,10 @@ Congrats! you've created your own copy of the blog!
 
 #### Upload and Branch
 Now, you should be on `https://github.com/YOUR GITHUB USERNAME/blog.iscsc.fr`, go there if you're not and:
-- click `Add file` then `Upload files`
+- click `Add file` then `Upload files`  
 ![](2-upload-files.png)
 
-- then **drag** your new post in the box (or add it with `choose your files`) 
+- then **drag** your new post in the box (or add it with `choose your files`)  
 ![](3-propose-changes.png)
 - select `Create a new branch...` (the name don't matter)
 - click `Propose changes`
@@ -100,7 +100,7 @@ Now, you should be on `https://github.com/YOUR GITHUB USERNAME/blog.iscsc.fr`, g
 OK, let's wrap up a bit, here you should already have: 
 - created your GitHub account
 - created your fork
-- uploaded your file (and created your branch)
+- uploaded your file (and thus created your branch)
 
 Now let's create the associated **Pull Request** to finally share your article with the world!
 
@@ -111,7 +111,7 @@ Now let's create the associated **Pull Request** to finally share your article w
 
 Now that your files are uploaded you should see:
 ![](4a1-compare-across-forks.png)
-- click `compare across forks` (under the cursor on the screenshot)
+- click `compare across forks` (under the cursor on the above screenshot)
 - then change `base repository` and select `iScsc/blog.iscsc.fr`
 ![](4a2-choose-iscsc-repo.png)
 

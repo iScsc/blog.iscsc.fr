@@ -2,6 +2,10 @@ languageCode = "en-us"
 title = "iScsc Blog"
 theme = "poison"
 
+## HUGO config:
+enableEmoji = true
+
+## Poison config:
 # copy paste from https://themes.gohugo.io/themes/poison/#example-config :
 paginate = 10
 pluralizelisttitles = false   # removes the automatically appended "s" on sidebar entries

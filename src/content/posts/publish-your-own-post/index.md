@@ -46,7 +46,8 @@ import pwn
    
 \# python code you got it  
 `` `
-Note: remove the whitespace : `` ` -> ``` I wrote it that way because it would be interpreted as code section otherwise...
+Note: remove the whitespace : `` ` -> ``` I wrote it that way because it would be
+interpreted as code section otherwise...
 ```
 An online markdown editor to get used to it: https://stackedit.io/  
 There is also a VSCode extension to render markdown in VSCode: `Markdown All in One`.
@@ -107,9 +108,9 @@ OK, let's wrap up a bit, here you should already have:
 Now let's create the associated **Pull Request** to finally share your article with the world!
 
 #### 3.4.A- Create PR directly...
-> **NOTE**: if you don't end up on the same webpage than me, skip this **subsection** and go to `OR from the repo's page`.
+> **NOTE**: if you don't end up on the same webpage than me, skip this **subsection** and go to `OR from the repo's page` (3.4.B subsection).
 
-> **NOTE 2**: if you're interested in why we're doing this, `git` mechanisms (branch, ...) and `GitHub` ones (repos, Pull Requests, Forks), I should right soon a blog post on the [blog](https://iscsc.fr)
+> **NOTE 2**: if you're interested in why we're doing this, `git` mechanisms (branch, ...) and `GitHub` ones (repos, Pull Requests, Forks), I should right soon post an article on the [blog](https://iscsc.fr)
 
 Now that your files are uploaded you should see:
 ![](4a1-compare-across-forks.png)
@@ -130,7 +131,7 @@ Finally the head banner should look something like:
 - click `Compare & pull request`
 
 ### 3.5- Write a good Pull Request
-The hardest part is done, now just fulfill the title and and description of the Pull Request and click `Create Pull Request`
+The hardest part is done, now just fulfill the title and description of the Pull Request and click `Create Pull Request`
 ![](5-pr-title-description.png)
 
 ## 4- Review

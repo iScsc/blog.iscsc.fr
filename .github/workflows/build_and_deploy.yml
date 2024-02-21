@@ -30,7 +30,7 @@ jobs:
       - name: 🛠️ Build with HUGO
 #        shell: bash
         run: |
-          docker compose up builder --exit-code-from
+          docker compose up --exit-code-from builder
           echo $?
 
       # Upload build artifacts for deployment or download

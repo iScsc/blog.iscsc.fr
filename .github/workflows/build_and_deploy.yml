@@ -29,7 +29,7 @@ jobs:
       # Build the static website with the provided docker-compose rules
       - name: 🛠️ Build with HUGO
         run: |
-          docker compose up builder
+          docker compose up builder --exit-code-from builder
 
       # Upload build artifacts for deployment or download
       - name: 🚀 Upload Artifacts

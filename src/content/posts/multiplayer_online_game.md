@@ -5,7 +5,7 @@ Naturally, we decided to code using python because it was simpler to begin with 
 
 So, we began with a little documentation and we discovered the magic of **sockets** !
 
-For those who don't know anything about them, it is basically a glass bottle in which you put your message, and that you then throw away in the vague direction of your friend, hoping for them to receive it. (Here is the very looong documentation of python : https://docs.python.org/3/library/socket.html)
+For those who don't know anything about them, it is basically a glass bottle in which you put your message, and that you then throw away in the approximate direction of your friend, hoping for them to receive it. (Here is the very looong documentation of python : https://docs.python.org/3/library/socket.html)
 
 ## First Step : Successfully sending a simple message to another computer in our LAN
 blabla
@@ -21,7 +21,7 @@ blabla
 
 ## The road to UDP connection
 ### What is UDP and why would we want to use that ?
-The thing is, from the very beginning of this project, we learned how to use sockets with Python, but only using the TCP protocol, which is very **NOT** optimal for video games.
+The thing is, from the very beginning of this project, we learnt how to use sockets with Python, but only using the TCP protocol, which is very **NOT** optimal for video games.
 
 For those who don't know, the TCP protocol means that your communications look like this :
 - You establish a communication with an IP sending something like : "I want to talk with you."

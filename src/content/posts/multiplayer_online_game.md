@@ -8,16 +8,69 @@ So, we began with a little documentation and we discovered the magic of **socket
 For those who don't know anything about them, it is basically a glass bottle in which you put your message, and that you then throw away in the approximate direction of your friend, hoping for them to receive it. (Here is the very looong documentation of python : https://docs.python.org/3/library/socket.html)
 
 ## First Step : Successfully sending a simple message to another computer in our LAN
-blabla
+The first step here to understand how all this socket-stuff works is to try to make a simple 'email' system. The goal here is to make a python script able to send a predefined message to another computer.
+
+To do so, we need to define a server script and a client script.
+The server will initialize a socket which will listen to incoming messages, while the client will initialize a socket to send messages to the server.
+
+The server side will look like this :
+```
+a
+```
+
+Where ... is ....
+
+On the client side, it will be this :
+```
+a
+```
+
+In this code, .... does ....
 
 ## Simple online implementation to play a basic game
-blabla
+Well, to make a simple game, you must implement a visual interface and rules in order to make this a bit more interactive, but the online part is in fact almost done !
+We used pygame in order to make a small map where squares - which are players - will be able to move.
+
+The only 'new' think we need to do is to formalize these messages to make the server understand client's actions.
+To do so, we decided that the clients would only send their inputs to the server, and that the server would compute the players' new positions and send them back to the clients. This will implement a semi anti-cheat as players won't be able to directly send their positions to the server, and thus try to teleport. However, it will increase the amount of calculations required by the server and may cause some more lags in case of huge calculations.
+
+We thus decided to implement some basic formalized messages to communicate with the server which are :
+```
+a
+```
+```
+a
+```
+```
+a
+```
+.
+.
+.
 
 ## First improvement of the connection
-blabla
+Yet, this is not optimized at all. In fact, what we do here is we create a new socket, send a message, then destroy this socket, and then start all over from the beginning.
+Obviously, this is not the way it should be, and we can improve this by opening a socket at first, and then keeping it open all the time the client is connected.
+This is how it is done. Instead of this :
+```
+a
+```
+We now write this :
+```
+a
+```
+
+.
+.
+.
 
 ## But, how to reduce ping ?
-blabla
+Yet, when several players connect (more than 3 in average), clients start to suffer from increasing ping, which end up creating seconds of latency for players' movements. But how does this happen ?
+It seems the server is overcrowded ! In fact, we are DDOSing our own server by sending way to many messages at the same time.
+
+A first thing we could do is to reduce the frequency of communications with the server to reduce the ping. Indeed it works, but it also make movements less smooth, and ask to change the way we designed the game. Whatever the solution we develop next, this is a good thing to do when possible, because it will greatly help the server and reduce its charge.
+
+But we will now look into another issue we had with this code, and that I didn't talk about when explaining sockets : its communicating protocol.
 
 ## The road to UDP connection
 ### What is UDP and why would we want to use that ?

@@ -1,5 +1,8 @@
 # blog.iscsc.fr: a blog built with HUGO framework
 
+TODO pour cette PR: virer le todo à la fin et mettre les features
+
+
 ## TODO
 Non-exhaustive TODO-list:
  - [X] write a workflow that prevents merging if website doesn't build

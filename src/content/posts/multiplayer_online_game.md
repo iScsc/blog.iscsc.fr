@@ -12,15 +12,89 @@ The first step here to understand how all this socket-stuff works is to try to m
 
 To do so, we need to define a server script and a client script.
 The server will initialize a socket which will listen to incoming messages, while the client will initialize a socket to send messages to the server.
+(We wrote this code thanks to the python documentation's example : https://docs.python.org/3/library/socketserver.html#socketserver-tcpserver-example)
 
-The server side will look like this :
+### The server side will look like this :
 ```
-a
+import socketserver
+
+class MyTCPHandler(socketserver.BaseRequestHandler):
+    """
+    The request handler class for our server.
+
+    It is instantiated once per connection to the server, and must
+    override the handle() method to implement communication to the
+    client.
+    """
+
+    def handle(self):
+        # self.request is the TCP socket connected to the client
+        self.data = self.request.recv(1024).strip()
+        
+        in_ip = self.client_address[0]
+        
+        print("{} wrote:".format(in_ip))
+        in_data = str(self.data,'utf-16')
+        print(in_data)
+        
+        out = "Hello client, you correctly sent your message : '" + in_data + "' to the server."
+
+        print(">>> ",out,"\n")
+        self.request.sendall(bytes(out,'utf-16'))
+
+
+
+# ----------------------- Main -----------------------
+
+if __name__ == "__main__":
+    HOST, PORT = str(IP), 9998
+    socketserver.TCPServer.allow_reuse_address = True
+    # Create the server, bound to the given IP on port 9998
+    with socketserver.TCPServer((HOST, PORT), MyTCPHandler) as server:
+        print("HOST = ",IP,"\nPORT = ",PORT,"\n")
+        # Activate the server; this will keep running until you
+        # interrupt the program with Ctrl-C
+        server.serve_forever()
 ```
 
-Where ... is ....
+Ok so it may seems a big difficult to understand, but not everything here is important to really understand, and you will see further that what we did was in fact easier to understand in the end.
 
-On the client side, it will be this :
+But to give some explanation, sockets are 'objects' in Python, so they are custom classes. Here, the class we define (`MyTCPHandler`) is the way the socket must react to incoming messages, not the socket itself which is already coded. It is defined in the `handle(self)` method. What it does here is that it reads the incoming message with `self.data = self.request.recv(1024).strip()`. The data is stored in bytes here. The client address is automatically stored in `self.client_address` as the name is explicit enough. We then just print the client ip and data in the server terminal to be able to check that we correctly received the message (after converting the bytes to str with the `utf-16` convention).
+
+And then, we just send it back to the client with a little confirmation message after converting it back to bytes with the lines :
+```
+out = "Hello client, you correctly sent your message : '" + in_data + "' to the server."
+self.request.sendall(bytes(out,'utf-16'))
+```
+
+So, now that we defined the way we want our socket to react to messages, we just need to initialize our socket ! To do so, we use a form very similar to the `open folder` form in Python. Here, it is the part :
+```
+with socketserver.TCPServer((HOST, PORT), MyTCPHandler) as server:
+    print("HOST = ",IP,"\nPORT = ",PORT,"\n")
+    # Activate the server; this will keep running until you
+    # interrupt the program with Ctrl-C
+    server.serve_forever()
+```
+What happens here is we initialize a new socket with the given address `(HOST, PORT)` where HOST is the IP of our server (it is the IP of the computer that will run this program). To obtain it, you can either use some websites, your terminal, or use the next Python lines :
+```
+import socket
+
+def extractingIP():
+    s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+    s.connect(("8.8.8.8", 80))
+    ip = s.getsockname()[0]
+    s.close()
+    return(ip)
+
+IP = extractingIP()
+```
+
+Once the socket is initialized, we verify that it has the correct address `(IP, PORT)` by printing it, and then we use the `serve_forever()` method which makes the server wait for new messages indefinitely and, when he receives one, executes the code we defined in the `handle(self)` method under the `MyTCPHandler` class. Once a message has been processed, it waits for another one to arrive.
+
+The only way to make it stop **here** is to use ctrl+C in the terminal to shut down the process, but we can obviously implement a better way to shut down the server through the `handle(self)` method for instance (example : if the server receives `"STOP"`, the socket closes itself and the server code terminates).
+
+### On the client side, it will be this :
+
 ```
 a
 ```
@@ -50,7 +124,7 @@ a
 
 ## First improvement of the connection
 Yet, this is not optimized at all. In fact, what we do here is we create a new socket, send a message, then destroy this socket, and then start all over from the beginning.
-Obviously, this is not the way it should be, and we can improve this by opening a socket at first, and then keeping it open all the time the client is connected.
+Obviously, this is not the way it should be, and we can improve this by creating a socket at first, and then keeping it open all the time the client is connected.
 This is how it is done. Instead of this :
 ```
 a
@@ -66,11 +140,11 @@ a
 
 ## But, how to reduce ping ?
 Yet, when several players connect (more than 3 in average), clients start to suffer from increasing ping, which end up creating seconds of latency for players' movements. But how does this happen ?
-It seems the server is overcrowded ! In fact, we are DDOSing our own server by sending way to many messages at the same time.
+It seems the server is overcrowded ! In fact, we are DDOSing our own server by sending way too many messages at the same time...
 
 A first thing we could do is to reduce the frequency of communications with the server to reduce the ping. Indeed it works, but it also make movements less smooth, and ask to change the way we designed the game. Whatever the solution we develop next, this is a good thing to do when possible, because it will greatly help the server and reduce its charge.
 
-But we will now look into another issue we had with this code, and that I didn't talk about when explaining sockets : its communicating protocol.
+But we will now look into another issue we had with this code, and that I didn't talk much about when explaining sockets : its communicating protocol.
 
 ## The road to UDP connection
 ### What is UDP and why would we want to use that ?
@@ -220,10 +294,10 @@ sock.close()
 ```
 
 ## Future Improvements to do...
-To keep on improving the performances of the online system, we worked on a thread based system in which both clients and the server would have one thread to listen for messages, and one thread to send their messages. In this scenario, the server sends automatically every few milliseconds the current state of the game to every client connected to the server, while each client sends their input continuously.
+To keep on improving the performances of the online system, we worked on a thread based system in which both clients and the server would have one thread to listen for messages, and one thread to send their messages. In this scenario, the server sends automatically every few milliseconds the current state of the game to every clients connected to the server, while each client sends their input continuously.
 
-Another way to improve the ping that we did not implement yet is to make clients stop sending permanently all their inputs. Instead, clients would only send their new inputs when the player changes input. This way, the server would receive way less messages and it would instead store the last input made by each player, and assume it is their current input as long as they do not send any other input.
+Another way to improve the ping that we did not implement yet is to make clients stop sending permanently all their inputs. Instead, clients would only send their new inputs when the player changes input. This way, the server would receive way less messages and it would instead store the last input made by each player, and assume it is their current input as long as they do not send another one.
 This would work by sending a rack of several messages when changing input to be sure the server has correctly received it, and by asking for a confirmation.
 In this case, the server would make the state of the game update every X ms, with the stored inputs of every player, and automatically send back to everyone the new state of the game.
 
-Finally, another way to make the game look a lot smoother would be to let clients assume and compute the next frames of the game without waiting for the actual computations of the server. This could help make the game look smoother even when the connection is not stable.
+Finally, another way to make the game look a lot smoother would be to let clients assume and compute the next frames of the game without waiting for the actual computations of the server. This could help make the game look smoother even when the connection is not stable, and it is what is done in most online games nowadays.

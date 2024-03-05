@@ -23,6 +23,9 @@ I **STRONGLY** recommend you to **read every NOTE** at each section's beginning,
 
 Also as stated later, if you're struggling with something, you can contact me on Discord: `ctmbl` or open an [Issue](https://github.com/iScsc/blog.iscsc.fr/issues) on the GitHub repository.
 
+> **DISCLAIMER**: This article has been written for `git`/GitHub **beginners**, to publish through the GitHub's web interface.
+> If you're used to `git` cloning and GitHub's forking and PR mechanisms you can create the Pull Request has you're used to!
+
 ## 1- Write your post in markdown
 > **NOTE**: if you're already used to Markdown you can skip to section 2 :slight_smile:
 

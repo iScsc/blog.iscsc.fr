@@ -108,7 +108,7 @@ OK, let's wrap up a bit, here you should already have:
 Now let's create the associated **Pull Request** to finally share your article with the world!
 
 #### 3.4.A- Create PR directly...
-> **NOTE**: if you don't end up on the same webpage than me, skip this **subsection** and go to `OR from the repo's page` (3.4.B subsection).
+> **NOTE**: if you don't end up on the same webpage than me, skip this **subsection** and go to `OR from the repo's page` (subsection 3.4.B).
 
 > **NOTE 2**: if you're interested in why we're doing this, `git` mechanisms (branch, ...) and `GitHub` ones (repos, Pull Requests, Forks), I should write soon an article on the [blog](https://iscsc.fr)
 

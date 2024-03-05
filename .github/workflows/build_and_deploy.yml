@@ -39,10 +39,17 @@ jobs:
           path: ./build/blog
 
   # Deployment job: heavily inspired from https://swharden.com/blog/2022-03-20-github-actions-hugo/
-  # /!\ only triggers on push events
+  # /!\ only triggers on push events AND on repos provinding required secrets
   deploy:
     needs: [build]
-    if: ${{ github.event_name == 'push' }}
+    ## Required secrets:
+    #   - SSH_KNOWN_HOSTS
+    #   - PRIVATE_SSH_KEY
+    #   - CI_USER_NAME
+    #   - STATIC_WEBSITE_PATH
+    env:
+      HAVE_REQUIRED_SECRETS: ${{ secrets.SSH_KNOWN_HOSTS != '' && secrets.PRIVATE_SSH_KEY != '' && secrets.CI_USER_NAME != '' && secrets.STATIC_WEBSITE_PATH != '' }}
+    if: ${{ github.event_name == 'push' && env.HAVE_REQUIRED_SECRETS == 'true'}}
     runs-on: ubuntu-latest
     steps:
       - name: 🛠️ Setup build directory

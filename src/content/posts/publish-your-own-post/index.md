@@ -41,6 +41,7 @@ My list:
 ```
  - next paragraph by letting an **empty line**
  - [hyperlinks](https://developer.mozilla.org/en-US/docs/Learn/Common_questions/Web_mechanics/What_are_hyperlinks) with `[some blabla](http://blabla.com)`
+ - images with `![](image.png)`
  - inline `code` with \`inline code\`
  - code section with:  
 ```

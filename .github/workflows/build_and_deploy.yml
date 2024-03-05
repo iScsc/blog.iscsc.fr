@@ -49,7 +49,7 @@ jobs:
     #   - STATIC_WEBSITE_PATH
     env:
       HAVE_REQUIRED_SECRETS: ${{ secrets.SSH_KNOWN_HOSTS != '' && secrets.PRIVATE_SSH_KEY != '' && secrets.CI_USER_NAME != '' && secrets.STATIC_WEBSITE_PATH != '' }}
-    if: ${{ github.event_name == 'push' && env.HAVE_REQUIRED_SECRETS == 'true'}}
+    if: env.HAVE_REQUIRED_SECRETS == 'true'
     runs-on: ubuntu-latest
     steps:
       - name: 🛠️ Setup build directory

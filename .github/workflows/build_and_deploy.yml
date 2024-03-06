@@ -48,7 +48,7 @@ jobs:
     #   - CI_USER_NAME
     #   - STATIC_WEBSITE_PATH
     env:
-      HAVE_REQUIRED_SECRETS: ${{ secrets.SSH_KNOWN_HOSTS != '' && secrets.PRIVATE_SSH_KEY != '' && secrets.CI_USER_NAME != '' && secrets.STATIC_WEBSITE_PATH != '' }}
+      HAVE_REQUIRED_SECRETS: ${{ secrets.SSH_KNOWN_HOSTS != '' }}
     #if: ${{ env.HAVE_REQUIRED_SECRETS == 'true' }}
     runs-on: ubuntu-latest
     steps:

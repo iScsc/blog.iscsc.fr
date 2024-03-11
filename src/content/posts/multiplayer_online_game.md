@@ -67,7 +67,9 @@ out = "Hello client, you correctly sent your message : '" + in_data + "' to the 
 self.request.sendall(bytes(out,'utf-16'))
 ```
 
-So, now that we defined the way we want our socket to react to messages, we just need to initialize our socket ! To do so, we use a form very similar to the `open folder` form in Python. Here, it is the part :
+So, now that we defined the way we want our socket to react to messages, we just need to initialize it ! To do so, we use a form very similar to the `open folder` form in Python `with open() as f:`.
+
+Here, it is the initialization of our socket :
 ```
 with socketserver.TCPServer((HOST, PORT), MyTCPHandler) as server:
     print("HOST = ",IP,"\nPORT = ",PORT,"\n")
@@ -91,52 +93,277 @@ IP = extractingIP()
 
 Once the socket is initialized, we verify that it has the correct address `(IP, PORT)` by printing it, and then we use the `serve_forever()` method which makes the server wait for new messages indefinitely and, when he receives one, executes the code we defined in the `handle(self)` method under the `MyTCPHandler` class. Once a message has been processed, it waits for another one to arrive.
 
-The only way to make it stop **here** is to use ctrl+C in the terminal to shut down the process, but we can obviously implement a better way to shut down the server through the `handle(self)` method for instance (example : if the server receives `"STOP"`, the socket closes itself and the server code terminates).
+The only way to make it stop **for now** is to use ctrl+C in the terminal to shut down the process, but we can obviously implement a better way to shut down the server through the `handle(self)` method for instance (example : if the server receives `"STOP"`, the socket closes itself and the server code terminates).
+
+Don't mind the 
+`socketserver.TCPServer.allow_reuse_address = True`, this line is not mandatory but it allows the server to be closed and reopened with the exact same `(IP, PORT)`. If you don't write this line, the only thing that will change is the fact that when closing your server, you will have to wait about 30 seconds to be able to open a new server with the same address.
 
 ### On the client side, it will be this :
 
 ```
-a
+from socket import *
+
+SERVER_IP = "localhost"
+SERVER_PORT = 9998
+
+def send(msg="Hello server!"):
+    """Sends the given message to the server.
+    """
+    
+    with socket(AF_INET, SOCK_STREAM) as sock:        
+        # send data
+        sock.connect((SERVER_IP, SERVER_PORT))
+        sock.sendall(bytes(msg, "utf-16"))
+        
+        # receive answer
+        answer = str(sock.recv(1024*2), "utf-16")
+        
+        return answer
+
+while True:
+    msg = input(What message do you want to send ? )
+    print(send(msg))
 ```
 
-In this code, .... does ....
+As you can see, we use the same kind of code to initialize a client socket. This time, we just don't need to define our own handler as it was the case for the server, and we can simply use the basic `socket` library instead of the `socketserver`. Just be aware that the socket object is `socket.socket` and that its parameters are `socket.AF_INET` and `socket.SOCK_STREAM`, but you can avoid mistakes by importing everything from socket as we did here with `from socket import *`.
+
+Then, we simply collect a message from the user in the terminal, and we send it to the server through the `sock.sendall()` method in our `send()` function. We then wait for the server to answer with `sock.recv()` and we print it.
+
+In this code, we first defined the server ip and port. Here, `"localhost"` is the best way to send the message to yourself without searching for your own ip. This way, you can just execute the server code in an instance of your terminal, and this code in another and try to send yourself some messages !
+
+Then, you can setup the server on another computer and try to communicate with it by changing this IP to the correct one.
 
 ## Simple online implementation to play a basic game
 Well, to make a simple game, you must implement a visual interface and rules in order to make this a bit more interactive, but the online part is in fact almost done !
 We used pygame in order to make a small map where squares - which are players - will be able to move.
 
-The only 'new' think we need to do is to formalize these messages to make the server understand client's actions.
-To do so, we decided that the clients would only send their inputs to the server, and that the server would compute the players' new positions and send them back to the clients. This will implement a semi anti-cheat as players won't be able to directly send their positions to the server, and thus try to teleport. However, it will increase the amount of calculations required by the server and may cause some more lags in case of huge calculations.
+The only 'new' thing we need to do is to formalize these messages to make the server understand client's actions.
+To do so, we decided that the clients would only send their inputs to the server, and that the server would compute the players' new positions and send them back to the clients. This will implement a semi anti-cheat as players won't be able to directly send their positions to the server, and thus try to teleport. However, it will increase the amount of calculations required by the server and may cause some more lags in case of huge computations due to some game rules later.
 
-We thus decided to implement some basic formalized messages to communicate with the server which are :
-```
-a
-```
-```
-a
-```
-```
-a
-```
-.
-.
-.
+We thus decided to implement some basic formalized messages to communicate with the server which are also defined in the README.md on the github page of the project https://github.com/iScsc/Haunted-Chronicles (There are more messages than the ones described here since the game evolved, but here are the first one we used) :
+
+* **Connection** : The client sends `CONNECT <Username> END` to the server, which sends back `CONNECTED <Username> END` if the connection succeeded.
+* **Clients' inputs** : The client sends `INPUT <Input> END` to the server where `<Input>` can be either `L` for left, `R` for right, `U` for up, `D` for down or `.` if there are no inputs. The server computes the new position and sends back the new state of the game with `STATE <PlayerList> END` where `<PlayerList>` is the list of player structures, which store the player's name, color and position.
+* **Disconnection** : The clients sends `DISCONNECT <Username> END` and receives `DISCONNECTED <Username> END` if the server has correctly destroyed the client's player structure. The client then closes.
+
+The `<Parameter>` fields are to replace with the correct values. For instance, for the connection : `CONNECT Zyno END`. The `END` field allows the server to easily recognize the end of a formatted message, and the conformity of it. The formatted messages begin with a `<TYPE>` field which allows the server to recognize the rule that must be applied on this kind of incoming message.
 
 ## First improvement of the connection
-Yet, this is not optimized at all. In fact, what we do here is we create a new socket, send a message, then destroy this socket, and then start all over from the beginning.
-Obviously, this is not the way it should be, and we can improve this by creating a socket at first, and then keeping it open all the time the client is connected.
-This is how it is done. Instead of this :
+Yet, this is not optimized at all. In fact, what we do here is we create a new socket, send a message, then automatically destroy this socket (when exiting the `with` indent), and then start all over from the beginning.
+Obviously, this is not the way it should be, and we can improve this by creating a socket at first, and then keeping it open as long as the client is connected.
+
+### Client-side improvements
+
+Instead of this :
 ```
-a
+def send(input="INPUT " + USERNAME + " . END"):
+    """Send a normalized request to the server and listen for the normalized answer.
+
+    Args:
+        input (str): Normalized request to send to the server. Defaults to "INPUT <Username> . END".
+
+    Returns:
+        str: the normalized answer from the server.
+    """
+    
+    global PING
+    
+    with socket(AF_INET, SOCK_STREAM) as sock:
+        t = time.time()
+        
+        # send data
+        sock.connect((SERVER_IP, SERVER_PORT))
+        sock.sendall(bytes(input, "utf-16"))
+        
+        
+        # receive answer
+        answer = str(sock.recv(1024*2), "utf-16")
+        
+        PING = int((time.time() - t) * 1000)
+        
+        return answer
 ```
 We now write this :
 ```
-a
+SOCKET = None
+
+PING = None # To display the approximate ping with the server
+
+#
+#
+# More code for display and things like that...
+#
+#
+
+def send(input="INPUT " + USERNAME + " . END"):
+    """Send a normalized request to the server and listen for the normalized answer.
+
+    Args:
+        input (str): Normalized request to send to the server. Defaults to "INPUT <Username> . END".
+
+    Returns:
+        str: the normalized answer from the server.
+    """
+    
+    global PING
+    global SOCKET
+    
+    # Initialization, when the socket has not been created yet
+    if (SOCKET == None and input[0:7] == "CONNECT"):
+        SOCKET = socket(AF_INET, SOCK_STREAM)
+        SOCKET.settimeout(SOCKET_TIMEOUT)
+        SOCKET.connect((SERVER_IP, SERVER_PORT))
+    
+    
+    # Usual behavior
+    if SOCKET != None:
+        t = time.time()
+
+        # send data
+        try:
+            SOCKET.sendall(bytes(input, "utf-16"))
+            
+            # receive answer
+            answer = str(SOCKET.recv(1024*2), "utf-16")
+            
+            PING = int((time.time() - t) * 1000)
+            
+            return answer
+        except:
+            exitError("Loss connection with the remote server.")
 ```
 
-.
-.
-.
+So, as you can see, we stopped using the `with` magic formula and we now initialize our socket in a GLOBAL variable named `SOCKET`. In fact, we detect the first need of defining our socket when the formalized `CONNECT` message is used, and that's why we don't initialize it before, in case the message would be wrong, but also to be able in some peculiar cases to disconnect and reconnect with a new socket.
+
+The rest of the code is really the same function as we used before. We send a formalized message to the server and then wait for the answer. This answer is interpreted to display the correct players at the correct positions, and even the approximate ping with the server which we simply compute with the time the answer took to come back, starting just before we sent our own message.
+
+It is in another function but we detect the disconnection when the client presses the escape button or closes the window, and we then executes this important code :
+```
+    SOCKET.close()
+    SOCKET = None
+```
+It is only two lines but it is really important to not forget to close the initialized sockets when they are not needed anymore. And putting SOCKET to None allows us to reconnect to another server if wanted.
+
+Obviously, we also improved the server-side on the exact same basis.
+Another key library we had to use was the threading library which allows to emulate threads in python. It was mandatory to display images with pygame while keeping sending messages to the server and receiving answers from it.
+
+### Server-side improvements
+
+For the server-side, our main became this :
+```
+from socket import *
+from threading import *
+
+def main():
+    global MAINSOCKET
+    global LOCK
+    
+    # Initialization
+    if MAINSOCKET == None:
+        MAINSOCKET = socket(AF_INET, SOCK_STREAM)
+        MAINSOCKET.setsockopt(SOL_SOCKET, SO_REUSEADDR, 1)
+        MAINSOCKET.bind((IP, PORT))
+        MAINSOCKET.listen(BACKLOG)
+    
+    if LOCK == None:
+        LOCK = Lock()
+    
+    print("Server opened with :\n    - ip = " + str(IP) + "\n    - port = " + str(PORT))
+    
+    listener_new = Thread(target=listen_new)
+    manager_server = Thread(target=manage_server)
+    listener_old = Thread(target=listen_old)
+    
+    listener_new.start()
+    manager_server.start()
+    listener_old.start()
+
+if __name__ == "__main__":
+    main()
+```
+Here we initialize the `MAINSOCKET` which is a socket from the basic `socket` library, and which will only be responsible for the connection attempts. We use the `socket.bind(address)` method to make it listens for incoming messages at the given `(IP, PORT)`. We then configure the maximum number of connection attempts the socket can queue with the `socket.listen(BACKLOG)` method. In our case, we used `BACKLOG = 1` and it is good to know that this parameter should usually be between 1 and 5 (usually 5 is the system-dependant maximum possible value). So our server will only accept a single connection each time we use the further explained `socket.accept()` method.
+
+We can see that we also defined our threads and started them.
+
+I won't show the complete code of these threads but to resume, the `listen_new` thread is the one that use the `MAINSOCKET` to accept new connections. The `listen_old` is the one that uses the newly created sockets to listen for already connected users. And the `manage_server` thread is a thread that allows the server to take commands from its terminal in order to change some parameters or close the server.
+
+So, let's start with the new way to accept connections. In the `listen_new` function, we wrote :
+```
+sock, addr = MAINSOCKET.accept()
+in_ip = addr[0]
+
+data = sock.recv(1024).strip()
+
+print("{} wrote:".format(in_ip))
+in_data = str(data,'utf-16')
+print(in_data)
+
+out = processRequest(in_ip ,in_data)
+message = out.split(' ')
+
+if message[0]=="CONNECTED":
+    LOCK.acquire()
+    username = message[1]
+    dicoSocket[username] = (sock, addr)
+    LOCK.release()
+
+print(">>> ",out,"\n")
+try:
+    sock.sendall(bytes(out,'utf-16'))
+```
+
+Ok so, the `MAINSOCKET.accept()` method listens for new connections that use the `SOCKET.connect((SERVER_IP, SERVER_PORT))` we saw on the client-side. When a connection succeeds, this method creates another socket, binds it to the client's socket and returns both the newly created socket and the address of the client. After this, when the client uses the `SOCKET.sendall()` method, the client will in fact send the data to this newly created socket.
+
+Then, we receive the connection data from the client and try to connect it to the server through our `processRequest(ip, data)` function. If it succeeds, we will send back a message of the type `CONNECTED <Username> END`. If it the case, we use our `LOCK` object (class from the `threading` library) which will temporary block the other threads with `LOCK.acquire()` while we store the newly created socket in a global list. Then, the `LOCK.release()` function will resume the threads.
+
+
+Then, to process the data sent to the already connected clients, we use our `listen_old` function, in which we wrote :
+```
+for elt in waitingDisconnectionList:
+    username, sock, addr = elt[0], elt[1], elt[2]
+    dicoSocket.pop(username)
+    
+    # deco remaining player with same ip if needed.
+    for username in dicoJoueur:
+        if dicoJoueur[username].ip == addr[0]:
+            dicoJoueur.pop(username)
+            break
+    
+    sock.close()
+waitingDisconnectionList = []
+
+
+LOCK.acquire()
+for username in dicoSocket:
+    sock = dicoSocket[username][0]
+    addr = dicoSocket[username][1]
+
+    data = sock.recv(1024).strip()
+    
+    in_ip = addr[0]
+    
+    print("{} wrote:".format(in_ip))
+    in_data = str(data,'utf-16')
+    print(in_data)
+    
+    out = processRequest(in_ip ,in_data)
+    message = out.split(" ")
+            
+    if message[0]=="DISCONNECTED":
+        username = message[1]
+        waitingDisconnectionList.append((username, sock, addr))
+    
+    print(">>> ",out,"\n")
+    try:
+        sock.sendall(bytes(out,'utf-16'))
+    except:
+        waitingDisconnectionList.append((username, sock, addr))
+LOCK.release()
+```
+
+The first loop is made to disconnect clients that sent the `DISCONNECT <Username> END` message. The second loop which is in the `LOCK.acquire()` state process data from the already connected clients, thanks to the socket dictionary we used to store the newly created sockets. This code would crash if new clients connected and if the dictionary changed during the for loop, so that's why we lock the other threads.
+
+Yet, the code is very similar to the client side here, but we first listen for data, and then send our answer back.
 
 ## But, how to reduce ping ?
 Yet, when several players connect (more than 3 in average), clients start to suffer from increasing ping, which end up creating seconds of latency for players' movements. But how does this happen ?

@@ -21,6 +21,11 @@ Non-exhaustive TODO-list:
 ## Features
 - renders emojis https://emojibase.dev/shortcodes/?
 
+## NOTES:
+- possible other choices for themes, other than git submodules: HUGO modules
+  - at least remove useless empty folders
+- hugo docker image: custom image rather than klakegg one's: more control over hugo's version 
+
 
 ## Deployment
 

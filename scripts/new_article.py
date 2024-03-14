@@ -4,8 +4,8 @@ import re
 import requests
 import yaml
 
-def main():
-    for file_path in sys.argv[1:]:
+def main(files_paths):
+    for file_path in files_paths:
         # Check that this is an article file
         if re.match("^src/content/posts/.+\.md$", file_path):
             ## Read YAML Header
@@ -40,4 +40,4 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    main(sys.argv[1:])

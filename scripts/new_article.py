@@ -4,10 +4,12 @@ import re
 import requests
 import yaml
 
+ARTICLE_FILE_BASE_PATH = "src/content/posts/"
+
 def main(files_paths):
     for file_path in files_paths:
         # Check that this is an article file
-        if re.match("^src/content/posts/.+\.md$", file_path):
+        if re.match(f"^{ARTICLE_FILE_BASE_PATH}.+\.md$", file_path):
             ## Read YAML Header
             with open(file_path, "r") as f:
                 raw_txt = f.read()

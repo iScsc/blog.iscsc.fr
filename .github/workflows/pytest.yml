@@ -1,0 +1,33 @@
+name: Pytest
+
+on:
+  # Runs on pull requests to check that the website is building without errors
+  pull_request:
+
+  # Only run if the push to main
+  push:
+    branches:
+      - main
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+jobs:
+  # Build job
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      # Checkout repo
+      - name: 🛒 Checkout
+        uses: actions/checkout@v3
+
+      # Install pytest
+      - name: 🛠️ Install pytest
+        run: |
+          python3 -m pip install pytest pytest-mock
+
+      # Run tests
+      - name: 🚀 Run pytest
+        run: |
+          cd ./scripts/
+          pytest

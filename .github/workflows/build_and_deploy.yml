@@ -73,8 +73,10 @@ jobs:
           rsync --archive --stats --verbose --delete ./build/blog/* ${{ secrets.CI_USER_NAME }}@iscsc.fr:${{ secrets.STATIC_WEBSITE_PATH}}
 
   # Finally notify of the new article (if any) on the iScsc discord server
+  # action jitterbit/get-changed-files@v1 doesn't support 'workflow_dispatch' events: https://github.com/jitterbit/get-changed-files/issues/38
   notify:
     needs: [deploy]
+    if: ${{ github.event_name != 'workflow_dispatch' }}
     runs-on: ubuntu-latest
     steps:
       # Checkout repo, no need to checkout submodule

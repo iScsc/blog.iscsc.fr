@@ -39,10 +39,10 @@ jobs:
           path: ./build/blog
 
   # Deployment job: heavily inspired from https://swharden.com/blog/2022-03-20-github-actions-hugo/
-  # /!\ only triggers on push events
+  # /!\ only triggers on push events and manually triggered
   deploy:
     needs: [build]
-    if: ${{ github.event_name == 'push' }}
+    if: ${{ github.event_name == 'push' || github.event_name == 'workflow_dispatch' }}
     runs-on: ubuntu-latest
     steps:
       - name: 🛠️ Setup build directory

@@ -39,12 +39,23 @@ jobs:
           path: ./build/blog
 
   # Deployment job: heavily inspired from https://swharden.com/blog/2022-03-20-github-actions-hugo/
-  # /!\ only triggers on push events
+  # /!\ only triggers on push events AND on repos provinding required secrets
   deploy:
     needs: [build]
-    if: ${{ github.event_name == 'push' }}
+    ## Required secrets:
+    #   - SSH_KNOWN_HOSTS
+    #   - PRIVATE_SSH_KEY
+    #   - CI_USER_NAME
+    #   - STATIC_WEBSITE_PATH
+    env:
+      HAVE_REQUIRED_SECRETS: ${{ secrets.SSH_KNOWN_HOSTS != '' }}
+    #if: ${{ env.HAVE_REQUIRED_SECRETS == 'true' }}
     runs-on: ubuntu-latest
     steps:
+      - name: Debug
+        run: |
+          echo "HAVE_REQUIRED_SECRETS = ${{ env.HAVE_REQUIRED_SECRETS }}"
+
       - name: 🛠️ Setup build directory
         run: |
           mkdir -p build/blog
@@ -68,9 +79,9 @@ jobs:
           echo "${{ secrets.PRIVATE_SSH_KEY }}" > ~/.ssh/id_rsa
 
       # Upload the build to the remote server location: the volume shared by the nginx container serving http requests
-      - name: 🚀 Upload
-        run: |
-          rsync --archive --stats --verbose --delete ./build/blog/* ${{ secrets.CI_USER_NAME }}@iscsc.fr:${{ secrets.STATIC_WEBSITE_PATH}}
+      # - name: 🚀 Upload
+      #   run: |
+      #     rsync --archive --stats --verbose --delete ./build/blog/* ${{ secrets.CI_USER_NAME }}@iscsc.fr:${{ secrets.STATIC_WEBSITE_PATH}}
 
   # Finally notify of the new article (if any) on the iScsc discord server
   notify:

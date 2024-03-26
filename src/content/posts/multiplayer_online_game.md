@@ -513,7 +513,7 @@ Because the select module allows to efficiently (low level) keep only sockets th
 
 Once sockets that have received data has been selected, a for loop on them to apply the usual reception and answering code allows for each client to send their inputs and receive the new state of the game.
 
-Finally, don't forget to close every sockets before completely closing the server, including the MAINSOCKET.
+Finally, don't forget to close every socket before completely closing the server, including the MAINSOCKET.
 When a client disconnect, its socket can be closed as well and its port can be add back in the available ports list:
 ```
 availablePorts.append(port)

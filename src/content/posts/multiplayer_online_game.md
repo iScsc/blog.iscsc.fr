@@ -12,7 +12,7 @@ The first step here to understand how all this socket-stuff works is to try to m
 
 To do so, we need to define a server script and a client script.
 The server will initialize a socket which will listen to incoming messages, while the client will initialize a socket to send messages to the server.
-(We wrote this code thanks to the python documentation's example : https://docs.python.org/3/library/socketserver.html#socketserver-tcpserver-example)
+We wrote this code thanks to the [python documentation's example](https://docs.python.org/3/library/socketserver.html#socketserver-tcpserver-example)
 
 ### The server side will look like this :
 ```

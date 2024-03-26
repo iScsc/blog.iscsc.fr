@@ -15,7 +15,7 @@ The server will initialize a socket which will listen to incoming messages, whil
 We wrote this code thanks to the [python documentation's example](https://docs.python.org/3/library/socketserver.html#socketserver-tcpserver-example)
 
 ### The server side will look like this :
-```
+```py
 import socketserver
 
 class MyTCPHandler(socketserver.BaseRequestHandler):
@@ -70,7 +70,7 @@ self.request.sendall(bytes(out,'utf-16'))
 So, now that we defined the way we want our socket to react to messages, we just need to initialize it ! To do so, we use a form very similar to the `open folder` form in Python `with open() as f:`.
 
 Here, it is the initialization of our socket :
-```
+```py
 with socketserver.TCPServer((HOST, PORT), MyTCPHandler) as server:
     print("HOST = ",IP,"\nPORT = ",PORT,"\n")
     # Activate the server; this will keep running until you
@@ -78,7 +78,7 @@ with socketserver.TCPServer((HOST, PORT), MyTCPHandler) as server:
     server.serve_forever()
 ```
 What happens here is we initialize a new socket with the given address `(HOST, PORT)` where HOST is the IP of our server (it is the IP of the computer that will run this program). To obtain it, you can either use some websites, your terminal, or use the next Python lines :
-```
+```py
 import socket
 
 def extractingIP():
@@ -100,7 +100,7 @@ Don't mind the
 
 ### On the client side, it will be this :
 
-```
+```py
 from socket import *
 
 SERVER_IP = "localhost"
@@ -155,7 +155,7 @@ Obviously, this is not the way it should be, and we can improve this by creating
 ### Client-side improvements
 
 Instead of this :
-```
+```py
 def send(input="INPUT " + USERNAME + " . END"):
     """Send a normalized request to the server and listen for the normalized answer.
 
@@ -184,7 +184,7 @@ def send(input="INPUT " + USERNAME + " . END"):
         return answer
 ```
 We now write this :
-```
+```py
 SOCKET = None
 
 PING = None # To display the approximate ping with the server
@@ -238,7 +238,7 @@ So, as you can see, we stopped using the `with` magic formula and we now initial
 The rest of the code is really the same function as we used before. We send a formalized message to the server and then wait for the answer. This answer is interpreted to display the correct players at the correct positions, and even the approximate ping with the server which we simply compute with the time the answer took to come back, starting just before we sent our own message.
 
 It is in another function but we detect the disconnection when the client presses the escape button or closes the window, and we then executes this important code :
-```
+```py
     SOCKET.close()
     SOCKET = None
 ```
@@ -250,7 +250,7 @@ Another key library we had to use was the threading library which allows to emul
 ### Server-side improvements
 
 For the server-side, our main became this :
-```
+```py
 from socket import *
 from threading import *
 
@@ -288,7 +288,7 @@ We can see that we also defined our threads and started them.
 I won't show the complete code of these threads but to resume, the `listen_new` thread is the one that use the `MAINSOCKET` to accept new connections. The `listen_old` is the one that uses the newly created sockets to listen for already connected users. And the `manage_server` thread is a thread that allows the server to take commands from its terminal in order to change some parameters or close the server.
 
 So, let's start with the new way to accept connections. In the `listen_new` function, we wrote :
-```
+```py
 sock, addr = MAINSOCKET.accept()
 in_ip = addr[0]
 
@@ -318,7 +318,7 @@ Then, we receive the connection data from the client and try to connect it to th
 
 
 Then, to process the data sent to the already connected clients, we use our `listen_old` function, in which we wrote :
-```
+```py
 for elt in waitingDisconnectionList:
     username, sock, addr = elt[0], elt[1], elt[2]
     dicoSocket.pop(username)
@@ -397,11 +397,11 @@ Now, let's go back to our code. Using UDP sockets in Python isn't really that bi
 
 Look at this :
 - This is TCP :
-```
+```py
 sock = socket(AF_INET, SOCK_STREAM)
 ```
 - And this is UDP :
-```
+```py
 sock = socket(AF_INET, SOCK_DGRAM)
 ```
 `SOCK_STREAM` means TCP, and `SOCK_DGRAM` UDP and voilà !
@@ -415,11 +415,11 @@ With UDP sockets, these functions have changed a little :
 There is no `sock.listen()`, `sock.accept()` nor `sock.connect()` anymore. However, the `sock.bind((IP, PORT))` function still exists and shall be used to make a socket work as a server which listen at a given IP and PORT.
 
 However, everything else now works with only two functions :
-```
+```py
 sock.sendto(bytes(message_to_send, "utf-8"), (SERVER_IP, SERVER_PORT))
 ```
 And :
-```
+```py
 data, addr = sock.recvfrom(MESSAGES_LENGTH)
 
 message_received = str(data.strip(), "utf-8") # Converting the received bytes into an str
@@ -433,31 +433,31 @@ And that's it ! Now, it's time for you to think about how you will use these two
 ### The UDP client-side now looks like this :
 
 Here is the initialization of the socket on the client-side :
-```
+```py
 SOCKET = socket(AF_INET, SOCK_DGRAM)
 SOCKET.settimeout(SOCKET_TIMEOUT)
 ```
 `SOCKET_TIMEOUT` being 0.5s in our case.
 
 The data is sent to the server using :
-```
+```py
 SOCKET.sendto(bytes(input, "utf-8"), (SERVER_IP, SERVER_PORT))
 ```
 
 The data is received using :
-```
+```py
 data, addr = SOCKET.recvfrom(MESSAGES_LENGTH)
 ```
 
 When we exit the game, the client finishes by closing the socket using the usual :
-```
+```py
 SOCKET.close()
 ```
 
 ### On the server-side, the code for UDP is now designed like this :
 
 The initialization is :
-```
+```py
 MAINSOCKET = socket(AF_INET, SOCK_DGRAM)
 MAINSOCKET.setsockopt(SOL_SOCKET, SO_REUSEADDR, 1) # Allows for the server to be reopened with the same ip immediately after being closed.
 MAINSOCKET.settimeout(TIMEOUT)
@@ -465,17 +465,17 @@ MAINSOCKET.bind((HOST, PORT))
 ```
 
 The server receives the data from clients with :
-```
+```py
 data, addr = MAINSOCKET.recvfrom(MESSAGES_LENGTH)
 ```
 
 and send back data with :
-```
+```py
 MAINSOCKET.sendto(bytes(out,'utf-8'), addr)
 ```
 
 However, we give each client a dedicated socket (linked to a given port) to talk to :
-```
+```py
 if message[0]=="CONNECTED":  # Detect connection
     sock = socket(AF_INET, SOCK_DGRAM)
     sock.setsockopt(SOL_SOCKET, SO_REUSEADDR, 1)
@@ -497,13 +497,13 @@ if message[0]=="CONNECTED":  # Detect connection
 ```
 
 When a client has its own dedicated socket, it receives the information of the new port in the connection confirmation, and changes the port it sends messages to using the command :
-```
+```py
 SERVER_PORT = int(portStr)
 ```
 With `portStr` being the extract of the connection message (the second word of the answer).
 
 After that, clients sends their messages to their own dedicated socket. We detect on the server side which sockets have received data using the lines :
-```
+```py
 sockets = [MAINSOCKET] + [dicoSocket[addr][0] for addr in dicoSocket]
 
 if sockets != []:
@@ -515,7 +515,7 @@ Once sockets that have received data has been selected, a for loop on them to ap
 
 Finally, don't forget to close every socket before completely closing the server, including the MAINSOCKET.
 When a client disconnects, its socket can be closed as well and its port can be add back in the available ports list:
-```
+```py
 availablePorts.append(port)
 sock.close()
 ```

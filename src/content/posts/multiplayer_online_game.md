@@ -1,5 +1,5 @@
 # Trying to make an online multiplayer minigame
-This project, called Haunted Chronicles, started when we wanted to introduce ourselves to online multiplyaer games and the code behind it.
+This project, called Haunted Chronicles, started when we wanted to introduce ourselves to online multiplayer games and the code behind it.
 
 Naturally, we decided to code using python because it was simpler to begin with - everyone knew how to code in Python - and because we just wanted to discover the notion, not to code a AAA game.
 

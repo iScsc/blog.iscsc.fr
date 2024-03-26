@@ -3,7 +3,7 @@ This project, called Haunted Chronicles, started when we wanted to introduce our
 
 Naturally, we decided to code using python because it was simpler to begin with - everyone knew how to code in Python - and because we just wanted to discover the notion, not to code an AAA game.
 
-So, we began with a little documentation and we discovered the magic of **sockets** !
+So, we began with a little documentation and we discovered the magic of **sockets**!
 
 For those who don't know anything about them, it is basically a glass bottle in which you put your message, and that you then throw away in the approximate direction of your friend, hoping for them to receive it. (Here is the very looong documentation of python : https://docs.python.org/3/library/socket.html)
 
@@ -67,7 +67,7 @@ out = "Hello client, you correctly sent your message : '" + in_data + "' to the 
 self.request.sendall(bytes(out,'utf-16'))
 ```
 
-So, now that we defined the way we want our socket to react to messages, we just need to initialize it ! To do so, we use a form very similar to the `open folder` form in Python `with open() as f:`.
+So, now that we defined the way we want our socket to react to messages, we just need to initialize it! To do so, we use a form very similar to the `open folder` form in Python `with open() as f:`.
 
 Here, it is the initialization of our socket :
 ```py
@@ -121,7 +121,7 @@ def send(msg="Hello server!"):
         return answer
 
 while True:
-    msg = input(What message do you want to send ? )
+    msg = input("What message do you want to send?")
     print(send(msg))
 ```
 
@@ -129,12 +129,12 @@ As you can see, we use the same kind of code to initialize a client socket. This
 
 Then, we simply collect a message from the user in the terminal, and we send it to the server through the `sock.sendall()` method in our `send()` function. We then wait for the server to answer with `sock.recv()` and we print it.
 
-In this code, we first defined the server ip and port. Here, `"localhost"` is the best way to send the message to yourself without searching for your own ip. This way, you can just execute the server code in an instance of your terminal, and this code in another and try to send yourself some messages !
+In this code, we first defined the server ip and port. Here, `"localhost"` is the best way to send the message to yourself without searching for your own ip. This way, you can just execute the server code in an instance of your terminal, and this code in another and try to send yourself some messages!
 
 Then, you can setup the server on another computer and try to communicate with it by changing this IP to the correct one.
 
 ## Simple online implementation to play a basic game
-Well, to make a simple game, you must implement a visual interface and rules in order to make this a bit more interactive, but the online part is in fact almost done !
+Well, to make a simple game, you must implement a visual interface and rules in order to make this a bit more interactive, but the online part is in fact almost done!
 We used pygame in order to make a small map where squares - which are players - will be able to move.
 
 The only 'new' thing we need to do is to formalize these messages to make the server understand client's actions.
@@ -365,35 +365,35 @@ The first loop is made to disconnect clients that sent the `DISCONNECT <Username
 
 Yet, the code is very similar to the client side here, but we first listen for data, and then send our answer back.
 
-## But, how to reduce ping ?
-Yet, when several players connect (more than 3 in average), clients start to suffer from increasing ping, which end up creating seconds of latency for players' movements. But how does this happen ?
-It seems the server is overcrowded ! In fact, we are DDOSing our own server by sending way too many messages at the same time...
+## But, how to reduce ping?
+Yet, when several players connect (more than 3 in average), clients start to suffer from increasing ping, which end up creating seconds of latency for players' movements. But how does this happen?
+It seems the server is overcrowded! In fact, we assume that we were DDOSing our own server by sending way too many messages at the same time...
 
 A first thing we could do is to reduce the frequency of communications with the server to reduce the ping. Indeed it works, but it also make movements less smooth, and ask to change the way we designed the game. Whatever the solution we develop next, this is a good thing to do when possible, because it will greatly help the server and reduce its charge.
 
 But we will now look into another issue we had with this code, and that I didn't talk much about when explaining sockets : its communicating protocol.
 
 ## The road to UDP connection
-### What is UDP and why would we want to use that ?
+### What is UDP and why would we want to use that?
 The thing is, from the very beginning of this project, we learnt how to use sockets with Python, but only using the TCP protocol, which is very **NOT** optimal for video games.
 
 For those who don't know, the TCP protocol means that your communications look like this :
 - You establish a communication with an IP sending something like : "I want to talk with you."
 - You wait for an answer that says : "Ok, let's talk."
-- You send the message you first wanted to send : "Hello I am Zyno and happy to meet you !"
+- You send the message you first wanted to send : "Hello I am Zyno and happy to meet you!"
 - You wait for the receiver to send back to you : "I have correctly received your message."
 
 And this is a very simplified vision of it, because the TCP Protocol also runs several tests to assure there has been no loss during the communication. And it even make the frequency of communication vary if it thinks that the server is overwhelmed by many messages.
 To resume, when you want to make a game, in which losing a single frame of a 60-FPS game is not a problem at all, and you use a way of communicating with the server that may make your client wait before it is allowed to send messages, you are definitely not using the good communication protocol.
 
 On the other hand, let me introduce you to the UDP protocol. This amazing communication protocol basically makes your communications look like this :
-- You send the only message you wanted to send : "Hello I am Zyno and happy to meet you !"
+- You send the only message you wanted to send : "Hello I am Zyno and happy to meet you!"
 
-And that's it ! So, obviously, you may lose some messages in the process, and you won't know it. You don't have TCP's errors detection and correction algorithms either. But as I said earlier, we do not really suffer from a lack of a message every 5 ms in a video game.
+And that's it! So, obviously, you may lose some messages in the process, and you won't know it. You don't have TCP's errors detection and correction algorithms either. But as I said earlier, we do not really suffer from a lack of a message every 5 ms in a video game.
 
 ### Using UDP sockets instead of TCP sockets :
 
-Now, let's go back to our code. Using UDP sockets in Python isn't really that big of a deal. In fact, it's almost the same !
+Now, let's go back to our code. Using UDP sockets in Python isn't really that big of a deal. In fact, it's almost the same!
 
 Look at this :
 - This is TCP :
@@ -404,7 +404,7 @@ sock = socket(AF_INET, SOCK_STREAM)
 ```py
 sock = socket(AF_INET, SOCK_DGRAM)
 ```
-`SOCK_STREAM` means TCP, and `SOCK_DGRAM` UDP and voilà !
+`SOCK_STREAM` means TCP, and `SOCK_DGRAM` UDP and *voilà*!
 
 Ok, it is not **that** simple. The way you previously used this socket has changed a bit as well. Let's see which are the affected functions :
 
@@ -425,9 +425,9 @@ data, addr = sock.recvfrom(MESSAGES_LENGTH)
 message_received = str(data.strip(), "utf-8") # Converting the received bytes into an str
 ```
 Where `message_to_send`, which is here a string, is the data to send. It is firstly converted into bytes with the utf-8 encoding. You can also send any kind of data as long as you send it using bytes. The address you send the data to is given by the second parameter : `(SERVER_IP, SERVER_PORT)`.
-To receive data, the `recvfrom()` function takes the maximum length of the message you want to receive (in bytes). It returns both the `data` in bytes, and the address `addr = (IP, PORT)` from which the data has been sent. In our case, we convert it back into a string using the utf-8 decoding.
+To receive data, the `recvfrom()` function takes the maximum length of the message you want to receive (in bytes). It returns both the `data` in bytes, and the address `addr = (IP, PORT)` from which the data has been sent. In our case, we convert it back into a string using the utf-8 decoding. (We did change our encoding because as our formatted messages gained new keywords, and thus length, we wanted to reduce their sizes and we decided to lose the utf-16 characters to do so.)
 
-And that's it ! Now, it's time for you to think about how you will use these two simple functions in order to make what you want !
+And that's it! Now, it's time for you to think about how you will use these two simple functions in order to make what you want!
 
 ## Now : A quite stable game to play
 ### The UDP client-side now looks like this :

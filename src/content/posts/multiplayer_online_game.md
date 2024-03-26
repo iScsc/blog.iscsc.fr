@@ -1,4 +1,13 @@
-# Trying to make an online multiplayer minigame
+---
+title: "Trying to make an online multiplayer minigame"
+summary: "A simple article to explain how we made a multiplayer online game using python and what we learnt while doing it, from the very basic use of sockets, to the different communication protocols and a bit of optimization."
+date: 2024-03-11T16:39:09-02:00
+lastUpdate: 2023-03-26T20:18:09-02:00
+tags: ["iscsc","python","multiplayer"]
+author: Zyno
+draft: false
+---
+
 This project, called Haunted Chronicles, started when we wanted to introduce ourselves to online multiplayer games and the code behind it.
 
 Naturally, we decided to code using python because it was simpler to begin with - everyone knew how to code in Python - and because we just wanted to discover the notion, not to code an AAA game.

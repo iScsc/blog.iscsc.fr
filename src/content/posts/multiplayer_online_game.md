@@ -76,7 +76,7 @@ out = "Hello client, you correctly sent your message : '" + in_data + "' to the 
 self.request.sendall(bytes(out,'utf-16'))
 ```
 
-So, now that we defined the way we want our socket to react to messages, we just need to initialize it! To do so, we use a context manager, which is for example the `open folder` form in Python `with open() as f:`.
+So, now that we defined the way we want our socket to react to messages, we just need to initialize it! To do so, we use a [context manager](https://realpython.com/python-with-statement/), which is for example the `open folder` form in Python `with open(...) as f:`.
 
 Here, it is the initialization of our socket :
 ```py

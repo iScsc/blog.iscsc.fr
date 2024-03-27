@@ -35,7 +35,7 @@ And the `Get flag` tells us the challenge isn't solved yet.
 
 We also have some files that we downloaded at the start of the challenge, let's check what's inside of them:   
 `Setup.sol`
-```rust
+```solidity
 // SPDX-License-Identifier: UNLICENSED
 pragma solidity ^0.8.18;
 
@@ -57,7 +57,7 @@ contract Setup {
 We can for now see with the function `isSolved` that we need to verify `TARGET.lastEntrant() == "Pandora"`
 
 `FortifiedPerimeter.sol`
-```rust
+```solidity
 // SPDX-License-Identifier: UNLICENSED
 pragma solidity ^0.8.18;
 
@@ -98,7 +98,7 @@ Here we see multiple interesting things. First, we understand what was this "las
 This `name` function is defined as an `external` function in the `Entrant` interface. In Solidity, the `external` keyword means that the function is called from outside the contract. To read more about function types, you can check the doc [here](https://docs.soliditylang.org/en/v0.8.19/types.html#function-types). Here, it is left to the person interacting with the `enter` function to implement it. In itself, this is not a vulnerability.
 
 But the vulnerability comes in the following two lines:
-```rust
+```solidity
 require(_isAuthorized(_entrant.name()), "Intruder detected");
 lastEntrant = _entrant.name();
 ```
@@ -108,7 +108,7 @@ The interesting thing to note here is that the `name` function is called twice, 
 ***"What if we gave a name in the authorized list the first time the function is called and the name Pandora the second time ?"***
 
 I started by writing a solidity file for this (`fake_entrant.sol`)
-```rust
+```solidity
 // SPDX-License-Identifier: UNLICENSED
 pragma solidity ^0.8.18;
 

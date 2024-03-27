@@ -66,7 +66,7 @@ if __name__ == "__main__":
         server.serve_forever()
 ```
 
-Ok so it may seems a big difficult to understand, but not everything here is important to really understand, and you will see further that what we did was in fact easier to understand in the end.
+Ok so it may seem a big difficult to understand, but not everything here is important to really understand, and you will see further that what we did was in fact easier to understand in the end.
 
 But to give some explanation, sockets are 'objects' in Python, so they are custom classes. Here, the class we define (`MyTCPHandler`) is the way the socket must react to incoming messages, not the socket itself which is already coded. It is defined in the `handle(self)` method. What it does here is that it reads the incoming message with `self.data = self.request.recv(1024).strip()`. The data is stored in bytes here. The client address is automatically stored in `self.client_address` as the name is explicit enough. We then just print the client ip and data in the server terminal to be able to check that we correctly received the message (after converting the bytes to str with the `utf-16` convention).
 

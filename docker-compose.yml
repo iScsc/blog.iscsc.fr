@@ -3,7 +3,7 @@ version: "3.8"
 services:
   builder:
     image: floryn90/hugo:0.123.7
-    command: --verbose --baseURL="https://iscsc.fr" --buildFuture
+    command: --logLevel info --baseURL="https://iscsc.fr" --buildFuture
     environment:
       - HUGO_DESTINATION=/build/blog
       # For maximum backward compatibility with Hugo modules:

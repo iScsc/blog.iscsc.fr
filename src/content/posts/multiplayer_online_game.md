@@ -71,7 +71,7 @@ Ok so it may seems a big difficult to understand, but not everything here is imp
 But to give some explanation, sockets are 'objects' in Python, so they are custom classes. Here, the class we define (`MyTCPHandler`) is the way the socket must react to incoming messages, not the socket itself which is already coded. It is defined in the `handle(self)` method. What it does here is that it reads the incoming message with `self.data = self.request.recv(1024).strip()`. The data is stored in bytes here. The client address is automatically stored in `self.client_address` as the name is explicit enough. We then just print the client ip and data in the server terminal to be able to check that we correctly received the message (after converting the bytes to str with the `utf-16` convention).
 
 And then, we just send it back to the client with a little confirmation message after converting it back to bytes with the lines :
-```
+```py
 out = "Hello client, you correctly sent your message : '" + in_data + "' to the server."
 self.request.sendall(bytes(out,'utf-16'))
 ```

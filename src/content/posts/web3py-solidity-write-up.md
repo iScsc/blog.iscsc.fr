@@ -3,7 +3,7 @@ title: "Write-up of The Art of Deception (Blockchain) CTF HTB Apocalypse 2023"
 summary: "Introduction to Web3 security: an explanation of the logic put behind flagging a Web3 challenge, written in web3py and solidity."
 date: 2023-03-28T15:08:45-02:00
 lastUpdate: 2023-03-28T15:08:45-02:00
-tags: ["web3","solidity","write-up","Supwn"]
+tags: ["introduction", "web3", "solidity", "write-up", "Supwn"]
 author: Turtyo
 draft: false
 ---

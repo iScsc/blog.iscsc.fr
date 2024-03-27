@@ -8,6 +8,7 @@ author: Zyno
 draft: false
 ---
 
+<!--more-->
 - [A little introduction](#a-little-introduction)
 - [First Step : Successfully sending a simple message to another computer in our LAN](#first-step--successfully-sending-a-simple-message-to-another-computer-in-our-lan)
   - [The server side will look like this :](#the-server-side-will-look-like-this-)

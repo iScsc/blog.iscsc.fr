@@ -1,6 +1,6 @@
 ---
 title: "Write-up of Alien Saboteur (Reversing) CTF HTB Apocalypse 2023"
-summary: "Reversing alien gibberish"
+summary: "Reversing alien gibberish: a write-up of a Reverse challenge from basic binary analysis to final keygen script and exploit"
 date: 2023-04-25T17:52:09-02:00
 lastUpdate: 2023-04-25T17:52:09-02:00
 tags: ["reverse","write-up","Supwn"]

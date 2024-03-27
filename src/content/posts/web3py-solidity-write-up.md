@@ -1,6 +1,6 @@
 ---
 title: "Write-up of The Art of Deception (Blockchain) CTF HTB Apocalypse 2023"
-summary: "Simple tutorial to Discord bots using `discord.py`"
+summary: "Introduction to Web3 security: an explanation of the logic put behind flagging a Web3 challenge, written in web3py and solidity."
 date: 2023-03-28T15:08:45-02:00
 lastUpdate: 2023-03-28T15:08:45-02:00
 tags: ["web3","solidity","write-up","Supwn"]
@@ -203,5 +203,3 @@ Also if you just started working with web3 (as I did before this CTF), the diffe
 I hope this WU was clear, thank you for reading through it.
 
 Turtyo for the Supwn team
-
-","summary":"An explanation of the logic put behind flagging this challenge, written in web3py and solidity.","createdAt":{"$date":{"$numberLong":"1680016125730"}},"updatedAt":{"$date":{"$numberLong":"1680016125730"}},"__v":{"$numberInt":"0"}}

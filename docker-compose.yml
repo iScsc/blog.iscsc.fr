@@ -2,7 +2,7 @@ version: "3.8"
 
 services:
   builder:
-    image: klakegg/hugo:0.111.3
+    image: floryn90/hugo:0.111.3
     command: --verbose --baseUrl="https://iscsc.fr" --buildFuture
     environment:
       - HUGO_DESTINATION=/build/blog

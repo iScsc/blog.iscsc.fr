@@ -8,11 +8,11 @@ author: Zyno
 draft: false
 ---
 
-<!--more-->
+## Table of Contents
 - [A little introduction](#a-little-introduction)
 - [First Step : Successfully sending a simple message to another computer in our LAN](#first-step--successfully-sending-a-simple-message-to-another-computer-in-our-lan)
-  - [The server side will look like this :](#the-server-side-will-look-like-this-)
-  - [On the client side, it will be this :](#on-the-client-side-it-will-be-this-)
+  - [The server-side](#the-server-side-will-look-like-this-)
+  - [The client-side](#on-the-client-side-it-will-be-this-)
 - [Simple online implementation to play a basic game](#simple-online-implementation-to-play-a-basic-game)
 - [First improvement of the connection](#first-improvement-of-the-connection)
   - [Client-side improvements](#client-side-improvements)
@@ -20,10 +20,10 @@ draft: false
 - [But, how to reduce ping?](#but-how-to-reduce-ping)
 - [The road to UDP connection](#the-road-to-udp-connection)
   - [What is UDP and why would we want to use that?](#what-is-udp-and-why-would-we-want-to-use-that)
-  - [Using UDP sockets instead of TCP sockets :](#using-udp-sockets-instead-of-tcp-sockets-)
+  - [Using UDP sockets instead of TCP sockets](#using-udp-sockets-instead-of-tcp-sockets-)
 - [Now : A quite stable game to play](#now--a-quite-stable-game-to-play)
-  - [The UDP client-side now looks like this :](#the-udp-client-side-now-looks-like-this-)
-  - [On the server-side, the code for UDP is now designed like this :](#on-the-server-side-the-code-for-udp-is-now-designed-like-this-)
+  - [The UDP client-side](#the-udp-client-side-now-looks-like-this-)
+  - [The UDP server-side](#on-the-server-side-the-code-for-udp-is-now-designed-like-this-)
 - [Future Improvements to do...](#future-improvements-to-do)
 
 ## A little introduction
@@ -43,7 +43,7 @@ To do so, we need to define a server script and a client script.
 The server will initialize a socket which will listen to incoming messages, while the client will initialize a socket to send messages to the server.
 We wrote this code thanks to the [python documentation's example](https://docs.python.org/3/library/socketserver.html#socketserver-tcpserver-example)
 
-### The server side will look like this :
+### The server-side will look like this :
 ```py
 import socketserver
 
@@ -127,7 +127,7 @@ The only way to make it stop **for now** is to use ctrl+C in the terminal to shu
 Don't mind the 
 `socketserver.TCPServer.allow_reuse_address = True`, this line is not mandatory but it allows the server to be closed and reopened with the exact same `(IP, PORT)`. If you don't write this line, the only thing that will change is the fact that when closing your server, you will have to wait about 30 seconds to be able to open a new server with the same address.
 
-### On the client side, it will be this :
+### On the client-side, it will be this :
 
 ```py
 from socket import *

@@ -1,8 +1,8 @@
 ---
 title: "Trying to make an online multiplayer minigame"
 summary: "A simple article to explain how we made a multiplayer online game using python and what we learnt while doing it, from the very basic use of sockets, to the different communication protocols and a bit of optimization."
-date: 2024-03-11T16:39:09-02:00
-lastUpdate: 2023-03-26T20:18:09-02:00
+date: 2024-03-11T18:39:09+0200
+lastUpdate: 2024-04-02T18:14:47+0200
 tags: ["iscsc","python","network"]
 author: Zyno
 draft: false
@@ -11,19 +11,11 @@ draft: false
 ## Table of Contents
 - [A little introduction](#a-little-introduction)
 - [First Step : Successfully sending a simple message to another computer in our LAN](#first-step--successfully-sending-a-simple-message-to-another-computer-in-our-lan)
-  - [The server-side](#the-server-side-will-look-like-this-)
-  - [The client-side](#on-the-client-side-it-will-be-this-)
 - [Simple online implementation to play a basic game](#simple-online-implementation-to-play-a-basic-game)
 - [First improvement of the connection](#first-improvement-of-the-connection)
-  - [Client-side improvements](#client-side-improvements)
-  - [Server-side improvements](#server-side-improvements)
 - [But, how to reduce ping?](#but-how-to-reduce-ping)
 - [The road to UDP connection](#the-road-to-udp-connection)
-  - [What is UDP and why would we want to use that?](#what-is-udp-and-why-would-we-want-to-use-that)
-  - [Using UDP sockets instead of TCP sockets](#using-udp-sockets-instead-of-tcp-sockets-)
 - [Now : A quite stable game to play](#now--a-quite-stable-game-to-play)
-  - [The UDP client-side](#the-udp-client-side-now-looks-like-this-)
-  - [The UDP server-side](#on-the-server-side-the-code-for-udp-is-now-designed-like-this-)
 - [Future Improvements to do...](#future-improvements-to-do)
 
 ## A little introduction

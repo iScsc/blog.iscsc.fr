@@ -453,31 +453,34 @@ And that's it! Now, it's time for you to think about how you will use these two 
 ## Now : A quite stable game to play
 ### The UDP client-side now looks like this :
 
-Here is the initialization of the socket on the client-side :
+[Here](https://github.com/iScsc/Haunted-Chronicles/blob/eff735a3cd78b7b9f908d8238945b58e7827e43b/client.py#L451) is the initialization of the socket on the client-side :
 ```py
 SOCKET = socket(AF_INET, SOCK_DGRAM)
 SOCKET.settimeout(SOCKET_TIMEOUT)
 ```
 `SOCKET_TIMEOUT` being 0.5s in our case.
 
-The data is sent to the server using :
+The [data is then sent to the server](https://github.com/iScsc/Haunted-Chronicles/blob/eff735a3cd78b7b9f908d8238945b58e7827e43b/client.py#L469) using :
 ```py
 SOCKET.sendto(bytes(input, "utf-8"), (SERVER_IP, SERVER_PORT))
 ```
 
-The data is received using :
+The [data from the server is received](https://github.com/iScsc/Haunted-Chronicles/blob/eff735a3cd78b7b9f908d8238945b58e7827e43b/client.py#L483) using :
 ```py
 data, addr = SOCKET.recvfrom(MESSAGES_LENGTH)
 ```
 
-When we exit the game, the client finishes by closing the socket using the usual :
+When we exit the game, the client finishes by [closing the socket](https://github.com/iScsc/Haunted-Chronicles/blob/eff735a3cd78b7b9f908d8238945b58e7827e43b/client.py#L636) using the usual :
 ```py
 SOCKET.close()
 ```
+Don't forget these lines **every time** the process terminates!
+
+You can find the whole code [here](https://github.com/iScsc/Haunted-Chronicles/blob/main/client.py) but there are lots of aspects that were not discussed here because this article is focused on the online part only (A huge part of the client code is dedicated to the display of the game).
 
 ### On the server-side, the code for UDP is now designed like this :
 
-The initialization is :
+The [initialization](https://github.com/iScsc/Haunted-Chronicles/blob/eff735a3cd78b7b9f908d8238945b58e7827e43b/server.py#L1072) is :
 ```py
 MAINSOCKET = socket(AF_INET, SOCK_DGRAM)
 MAINSOCKET.setsockopt(SOL_SOCKET, SO_REUSEADDR, 1) # Allows for the server to be reopened with the same ip immediately after being closed.
@@ -485,17 +488,17 @@ MAINSOCKET.settimeout(TIMEOUT)
 MAINSOCKET.bind((HOST, PORT))
 ```
 
-The server receives the data from clients with :
+The server [receives the data from clients](https://github.com/iScsc/Haunted-Chronicles/blob/eff735a3cd78b7b9f908d8238945b58e7827e43b/server.py#L854) with :
 ```py
 data, addr = MAINSOCKET.recvfrom(MESSAGES_LENGTH)
 ```
 
-and send back data with :
+and [send back data](https://github.com/iScsc/Haunted-Chronicles/blob/eff735a3cd78b7b9f908d8238945b58e7827e43b/server.py#L894) with :
 ```py
 MAINSOCKET.sendto(bytes(out,'utf-8'), addr)
 ```
 
-However, we give each client a dedicated socket (linked to a given port) to talk to :
+However, we give each client a [dedicated socket](https://github.com/iScsc/Haunted-Chronicles/blob/eff735a3cd78b7b9f908d8238945b58e7827e43b/server.py#L869) (linked to a given port) to talk to :
 ```py
 if message[0]=="CONNECTED":  # Detect connection
     sock = socket(AF_INET, SOCK_DGRAM)
@@ -517,13 +520,13 @@ if message[0]=="CONNECTED":  # Detect connection
     dicoSocket[addr] = (sock, username)  # Keep the information of the link between sockets and players
 ```
 
-When a client has its own dedicated socket, it receives the information of the new port in the connection confirmation, and changes the port it sends messages to using the command :
+When a client has its own dedicated socket, it receives the information of the new port in the connection confirmation, and [changes the port it sends messages to](https://github.com/iScsc/Haunted-Chronicles/blob/eff735a3cd78b7b9f908d8238945b58e7827e43b/client.py#L337) using the command :
 ```py
 SERVER_PORT = int(portStr)
 ```
 With `portStr` being the extract of the connection message (the second word of the answer).
 
-After that, clients sends their messages to their own dedicated socket. We detect on the server side which sockets have received data using the lines :
+After that, clients sends their messages to their own dedicated socket. We [detect on the server side which sockets have received data](https://github.com/iScsc/Haunted-Chronicles/blob/eff735a3cd78b7b9f908d8238945b58e7827e43b/server.py#L847) using the lines :
 ```py
 sockets = [MAINSOCKET] + [dicoSocket[addr][0] for addr in dicoSocket]
 
@@ -534,12 +537,14 @@ Because the select module allows to efficiently (low level) keep only sockets th
 
 Once sockets that have received data has been selected, a for loop on them to apply the usual reception and answering code allows for each client to send their inputs and receive the new state of the game.
 
-Finally, don't forget to close every socket before completely closing the server, including the MAINSOCKET.
-When a client disconnects, its socket can be closed as well and its port can be add back in the available ports list:
+Finally, don't forget to close **every socket** before completely closing the server, including the MAINSOCKET.
+When a client disconnects, its [socket can be closed](https://github.com/iScsc/Haunted-Chronicles/blob/eff735a3cd78b7b9f908d8238945b58e7827e43b/server.py#L967) as well and its port can be add back in the available ports list:
 ```py
 availablePorts.append(port)
 sock.close()
 ```
+
+Same as before, you can find the whole server code [here](https://github.com/iScsc/Haunted-Chronicles/blob/main/server.py) but a huge part of the code is dedicated to shadow computations and messages processing. These main aspects were not explained here since it was not the original goal of the article.
 
 ## Future Improvements to do...
 To keep on improving the performances of the online system, we worked on a thread based system in which both clients and the server would have one thread to listen for messages, and one thread to send their messages. In this scenario, the server sends automatically every few milliseconds the current state of the game to every clients connected to the server, while each client sends their input continuously.

@@ -35,8 +35,8 @@ Here it helped a lot, in `main` we quickly note that there is a bunch of variabl
 This is the infinite loop allowing the shell to always wait for user instructions.
 
 We understand that the user is prompted for a string, which is then verified (some characters are forbidden in `commandAllowed` maybe there is something here) and parsed with `strtok`.
-Then a bunch of `if else` identify which function to execute given the user command. At that point I could have start looking into each and every function to look for vulnerabilities.
-But I didn't, I wanted to finish first the reading of `main` and I chose really well.
+Then a bunch of `if else` identify which function to execute given the user command. At that point I could have started looking into each and every function to look for vulnerabilities, but I didn't.
+I wanted to first finish the reading of `main` and I chose really well.
 
 So we continue reading `main` to the last `else` (in case the command doesn't match any predefined strings), and there we have some really interesting stuff!
 ```C

@@ -2,7 +2,7 @@
 title: "Trying to make an online multiplayer minigame"
 summary: "A simple article to explain how we made a multiplayer online game using python and what we learnt while doing it, from the very basic use of sockets, to the different communication protocols and a bit of optimization."
 date: 2024-03-11T18:39:09+0200
-lastUpdate: 2024-04-02T18:14:47+0200
+lastUpdate: 2024-04-07T14:24:12+0200
 tags: ["iscsc","python","network"]
 author: Zyno
 draft: false

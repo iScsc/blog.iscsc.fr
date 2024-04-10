@@ -111,6 +111,21 @@ THCON{G00d_0ld_0v3rfl0w}Unknow command, this event has been reported
 
 A good old overflow for sure 🙂, but a good reminder and a nice introduction to heap overflow overall 😉
 
+## Conclusion
+
+**To sum up**, here are the main step of the reasoning while tackling this challenge (and maybe how to tackle other `pwn` challenges):
+1. First: **what have I got? what do I want to achieve?**  
+ source code, **no binaries**, a remote access to the executing binary -> we want a **shell on the remote machine**
+2. Here we got source code but no binary, we **skip the inspect part** and just **compile the source code** as we can.  
+ We'll have to **assume the possible protection** of the remote binary.
+   > Note that these two first parts are often forgotten but they are basically driving the rest of the exploit...
+3. Dive into the source code, take a **global look** at the code but **quickly focus on main**.  
+ We do not try to understand everything or every line, just **identify the structure of the code** and potentialy flawed lines: arrays, `malloc` and `free`, `printf`, bounds of `for` loops, Time of Check Time of Use (TOCTOU)...
+4. We do not take a look at other functions while we have not finish reading main
+5. Get a **first idea, try it**, understand why it works, or why it doesn't
+6. Find a possible exploitable bug (here a buffer overflow), confirm it by several means (direct execution and with `ltrace` in my case) and rigorously define the needed payload (in my case the size of the padding)
+7. Exploit, flag, celebrate :tada:
+
 ## Resources
 
 > If any doubts you can always contact me on Discord `ctmbl` or issue on my [GitHub](https://github.com/ctmbl/ctf-write-ups/issues) if you need more information or resources 😉

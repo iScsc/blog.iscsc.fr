@@ -26,10 +26,12 @@ Once this is done we can start reading the source code!
 
 ## Source code inspection
 
-So let's read the code!
-`log.c` is really simple, just a `main` function, it's a logging tool, it will write its arguments passed in command line to a log file, that's all.
+> Please find the source code [on my GitHub](https://github.com/ctmbl/ctf-write-ups/blob/main/THCon-2024/pwn/Minishell)
 
-`minishell.c` is really something else: 269 lines of code.  
+So let's read the code!
+[`log.c`](https://github.com/ctmbl/ctf-write-ups/blob/main/THCon-2024/pwn/Minishell/log.c) is really simple, just a `main` function, it's a logging tool, it will write its arguments passed in command line to a log file, that's all.
+
+[`minishell.c`](https://github.com/ctmbl/ctf-write-ups/blob/main/THCon-2024/pwn/Minishell/minishell.c) is really something else: 269 lines of code.  
 When reading `C` code I always start looking globally at the function names and then I deep into the `main` function first.
 Here it helped a lot, in `main` we quickly note that there is a bunch of variables initialization, some memory allocation and then a `while(1)`!
 This is the infinite loop allowing the shell to always wait for user instructions.

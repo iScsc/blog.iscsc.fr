@@ -4,7 +4,7 @@ summary: "Initiation à Pwntools"
 date: 2024-02-14T20:00:00+01:00
 author: "Thomas Roberge"
 draft: false
-tags: ["write-up","FCSC","programming","pwntools","FR"]
+tags: ["introduction", "programming", "pwntools", "write-up", "FR"]
 ---
 
 > On peut retrouver ce challenge sur [Hackropole](https://hackropole.fr/fr/challenges/misc/fcsc2022-misc-a-l-envers/)

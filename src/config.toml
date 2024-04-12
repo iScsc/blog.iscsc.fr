@@ -9,6 +9,7 @@ enableEmoji = true
 # copy paste from https://themes.gohugo.io/themes/poison/#example-config :
 paginate = 10
 pluralizelisttitles = false   # removes the automatically appended "s" on sidebar entries
+capitalizelisttitles = false  # respect list title case; ex with author: ctmbl stays ctmbl not Ctmbl
 
 # NOTE: If using Disqus as commenting engine, uncomment and configure this line
 # disqusShortname = "yourDisqusShortname"
@@ -103,4 +104,5 @@ pluralizelisttitles = false   # removes the automatically appended "s" on sideba
 [taxonomies]
     series = 'series'
     tags = 'tags'
+    author = 'author'
 

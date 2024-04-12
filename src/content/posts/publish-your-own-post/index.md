@@ -23,6 +23,9 @@ I **STRONGLY** recommend you to **read every NOTE** at each section's beginning,
 
 Also as stated later, if you're struggling with something, you can contact me on Discord: `ctmbl` or open an [Issue](https://github.com/iScsc/blog.iscsc.fr/issues) on the GitHub repository.
 
+> **DISCLAIMER**: This article has been written for `git`/GitHub **beginners**, to publish through the GitHub's web interface.
+> If you're used to `git` cloning and GitHub's forking and PR mechanisms you can create the Pull Request as you're used to!
+
 ## 1- Write your post in markdown
 > **NOTE**: if you're already used to Markdown you can skip to section 2 :slight_smile:
 
@@ -38,6 +41,7 @@ My list:
 ```
  - next paragraph by letting an **empty line**
  - [hyperlinks](https://developer.mozilla.org/en-US/docs/Learn/Common_questions/Web_mechanics/What_are_hyperlinks) with `[some blabla](http://blabla.com)`
+ - images with `![](image.png)`
  - inline `code` with \`inline code\`
  - code section with:  
 ```
@@ -46,7 +50,8 @@ import pwn
    
 \# python code you got it  
 `` `
-Note: remove the whitespace : `` ` -> ``` I wrote it that way because it would be interpreted as code section otherwise...
+Note: remove the whitespace : `` ` -> ``` I wrote it that way because it would be
+interpreted as code section otherwise...
 ```
 An online markdown editor to get used to it: https://stackedit.io/  
 There is also a VSCode extension to render markdown in VSCode: `Markdown All in One`.
@@ -107,9 +112,9 @@ OK, let's wrap up a bit, here you should already have:
 Now let's create the associated **Pull Request** to finally share your article with the world!
 
 #### 3.4.A- Create PR directly...
-> **NOTE**: if you don't end up on the same webpage than me, skip this **subsection** and go to `OR from the repo's page`.
+> **NOTE**: if you don't end up on the same webpage than me, skip this **subsection** and go to `OR from the repo's page` (subsection 3.4.B).
 
-> **NOTE 2**: if you're interested in why we're doing this, `git` mechanisms (branch, ...) and `GitHub` ones (repos, Pull Requests, Forks), I should right soon a blog post on the [blog](https://iscsc.fr)
+> **NOTE 2**: if you're interested in why we're doing this, `git` mechanisms (branch, ...) and `GitHub` ones (repos, Pull Requests, Forks), I should write soon an article on the [blog](https://iscsc.fr)
 
 Now that your files are uploaded you should see:
 ![](4a1-compare-across-forks.png)
@@ -130,7 +135,7 @@ Finally the head banner should look something like:
 - click `Compare & pull request`
 
 ### 3.5- Write a good Pull Request
-The hardest part is done, now just fulfill the title and and description of the Pull Request and click `Create Pull Request`
+The hardest part is done, now just fulfill the title and description of the Pull Request and click `Create Pull Request`
 ![](5-pr-title-description.png)
 
 ## 4- Review

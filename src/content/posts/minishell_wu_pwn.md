@@ -12,7 +12,7 @@ draft: false
 
 ## Basics
 
-First of all we don't have binaries associated with the challenge so I add to compile them:
+First of all we don't have binaries associated with the challenge so I had to compile them:
 ```
 gcc log.c -o log
 gcc minishell.c -lcrypto -o minishell

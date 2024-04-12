@@ -1,6 +1,13 @@
-# Using bind mounts to build a persistent log system with Docker
+---
+title: "Use Docker's volumes to build a persistent log system"
+summary: "Persist data after container's death or share data accross containers through Docker's volume feature"
+date: 2023-09-19T12:00:00+0200
+lastUpdate: 2024-04-12T20:00:00+0200
+tags: ["docker", "volume", "log"]
+author: FireFrozen
+draft: false
+---
 
-_FireFrozen - 2023/09/19_
 
 Before reading this article, it's recommended to have a minimum knowledge of docker. See the previous blog on docker : [Get Started with Docker](https://iscsc.fr/blog/64601d94963f4a68d30f5795) by _ctmbl_
 

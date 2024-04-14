@@ -1,3 +1,4 @@
+# env files
 .env.prod
 .env.dev
 
@@ -10,3 +11,6 @@ certbot/*
 # hugo build
 src/public
 build/blog/*
+
+# python
+**/__pycache__

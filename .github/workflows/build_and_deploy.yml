@@ -39,7 +39,7 @@ jobs:
           path: ./build/blog
 
   # Deployment job: heavily inspired from https://swharden.com/blog/2022-03-20-github-actions-hugo/
-  # /!\ only triggers on push events AND non-fork repos
+  # /!\ only triggers on (push events AND non-fork repos) OR manually triggered
   ## Required secrets:
   #   - SSH_KNOWN_HOSTS
   #   - PRIVATE_SSH_KEY
@@ -52,10 +52,10 @@ jobs:
     # on fork repositories, but sadly the `env` context is not accessible from `jobs.<job_id>.if`:
     # https://docs.github.com/en/actions/learn-github-actions/contexts#context-availability
     #
-    # If for any reason you want to trigger this step on your fork remove the following line or
-    # open an issue https://github.com/iScsc/blog.iscsc.fr/issues, we'll find a better way to skip
-    # this step.
-    if: ${{ github.event_name == 'push' && github.event.repository.fork == 'false' }}
+    # If for any reason you want to trigger this step on your fork remove the following line,
+    # trigger manually or open an issue https://github.com/iScsc/blog.iscsc.fr/issues,
+    # we'll find a better way to skip this step.
+    if: ${{ (github.event_name == 'push' && github.event.repository.fork == 'false') || github.event_name == 'workflow_dispatch' }}
     runs-on: ubuntu-latest
     steps:
       - name: 🛠️ Setup build directory
@@ -86,8 +86,10 @@ jobs:
           rsync --archive --stats --verbose --delete ./build/blog/* ${{ secrets.CI_USER_NAME }}@iscsc.fr:${{ secrets.STATIC_WEBSITE_PATH}}
 
   # Finally notify of the new article (if any) on the iScsc discord server
+  # action jitterbit/get-changed-files@v1 doesn't support 'workflow_dispatch' events: https://github.com/jitterbit/get-changed-files/issues/38
   notify:
     needs: [deploy]
+    if: ${{ github.event_name != 'workflow_dispatch' }}
     runs-on: ubuntu-latest
     steps:
       # Checkout repo, no need to checkout submodule

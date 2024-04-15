@@ -71,7 +71,7 @@ Once your pull request have been accepted on the remote origin repository, you m
 
 To do so, you shall :
 
-* 1 - Go on your fork page on github and press the update fork page :
+* 1 - Go on your fork page on github and press the update fork button :
 [Insert image here]
 * 2 - Then, to update your local fork, you should use these 3 commands :
 * 2.1 - `git fetch origin` To download the remote state of the repository to your local github.

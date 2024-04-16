@@ -23,7 +23,7 @@ A docker's volume is the action of **mounting an existing file or directory** of
 
 ## Why do we need volumes?
 
-Docker containerization is very useful on lots of points for development but it's very annoying if your application **need to produce persistent data**, like logs. Indeed if you **kill** your container (to update it for example) or if it **crashes**, you **lose everything that where inside** and understanding why your application crashed without its logs can be very complicated or even impossible.
+Docker containerization is very useful on lots of points for development but it's very annoying if your application **needs to produce persistent data**, like logs. Indeed if you **kill** your container (to update it for example) or if it **crashes**, you **lose everything that was inside** and understanding why your application crashed without its logs can be very complicated or even impossible.
 
 So we need to find a way to **keep certain files after the container's death** and that can be **achieved with volumes**!.
 
@@ -62,7 +62,7 @@ A concrete example with the [code of our RootMe discord bot](https://github.com/
 	${NAME}:latest
 ```
 In this example `LOG_FOLDER` is an environment variable defined in the `.env.prod` file.  
-The code will written transparently to `/opt/${NAME}/logs/<log file>` but because this folder is shared with the host, logs will **be available in the host** and survive potential application crashes or updates.
+The code will write transparently to `/opt/${NAME}/logs/<log file>` but because this folder is shared with the host, logs will **be available in the host** and survive potential application crashes or updates.
 
 > **WARNING : Be careful that the bot/application running in the container must have the right permission to modify the file/directory**
 

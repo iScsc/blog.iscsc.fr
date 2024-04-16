@@ -3,7 +3,7 @@
 
 ### A quick explanation
 
-To make it simple, forks are copies of a repository you want to work on. This way, you can work on your version of the repository, creating branches, committing and pull requesting.
+To make it simple, forks are copies of a repository you want to work on. This way, you can work on your version of the repository, create branches, experiment stuff, commit and pull request.
 
 On many repositories you will not have the write access. Yet, you can still propose changes by forking the repository, working on it, and when finished, pull requesting the original repository you made the fork from.
 
@@ -54,7 +54,7 @@ When you want to send these changes to the remote repository, you shall use the 
 
 ```git push origin <your_branch>```
 
-(Git commands are also integrated into some code editors such as `vs code`, but you should now that it may sometimes do some strange things, and using the terminal commands may make it easier to understand what really happens.)
+(Git commands are also integrated into some code editors such as `vs code`, but you should know that it may sometimes do some strange things, and using the terminal commands may make it easier to understand what really happens.)
 
 ## Pull requesting
 

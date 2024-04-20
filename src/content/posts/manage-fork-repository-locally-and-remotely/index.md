@@ -36,6 +36,7 @@ First, clone your fork on your computer to work on it with the link of your repo
 
 In this example, `<link_to_your_fork>` would be `git@github.com:ZynoXelek/Haunted-Chronicles.git` :
 ![](working-on-your-fork-1.png)
+Using the ssh url first requires to have set up your SSH key with your github account. If you have not done it yet, you should probably read [Github - Create a SSH key](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent) and [GitHub - add a new SSH key](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/adding-a-new-ssh-key-to-your-github-account) first.
 
 Then, you can create a new branch by using the command :
 ```git branch <your_branch_name>```

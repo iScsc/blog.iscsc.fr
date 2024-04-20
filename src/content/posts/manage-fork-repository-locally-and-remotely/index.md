@@ -46,8 +46,17 @@ You can then place your git `HEAD` on this new branch by using the command :
 
 When this is done, you can then work on your code !
 
-When you have finished your work - or your session - don't forget to commit your changes :
+Once you have finished your work - or your session - don't forget to commit your changes after adding your new changes! To do so, first check the differences between your local repository and the remote one with ```git status```
 
+Then, you can selectively chose which files you want to add to your commit with ```git add <file1> <file2> ...``` or you can add them all with ```git add .```
+
+If you have made a mistake, you can revert a `git add` by using `git reset <file1> <file2> ...` or `git reset` to unstage them all. This will keep your local changes.
+
+Don't hesitate to use `git status` between each command to clearly see the actual state of your commit!
+
+Be careful, `git rm <file>` exists but it will permanently remove the file from the repository!
+
+When you have finished staging all your changes, you can commit by using the `commit` command :
 ```git commit -m <your_commit_name>```
 
 Note that this will just commit your changes on your local branch.

@@ -83,7 +83,7 @@ To do so, you shall :
 
 * 1 - Go on your fork page on github and press the update fork button :
 [Insert image here]
-* 2 - Then, to update your local fork, you should use these 3 commands :
+* 2 - Then, to update your local copy, you should use these 3 commands :
 * 2.1 - `git fetch origin` To download the remote state of the repository to your local github.
 * 2.2 - `git checkout main` To put your git `HEAD` on your `main` branch before pulling the changes.
 * 2.3 - `git rebase origin/main` To move your local main to remote reference you have just downloaded.

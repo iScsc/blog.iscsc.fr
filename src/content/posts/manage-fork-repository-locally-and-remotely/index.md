@@ -52,7 +52,7 @@ Then, you can selectively chose which files you want to add to your commit with 
 
 If you have made a mistake, you can revert a `git add` by using `git reset <file1> <file2> ...` or `git reset` to unstage them all. This will keep your local changes.
 
-Don't hesitate to use `git status` between each command to clearly see the actual state of your commit!
+Don't hesitate to use `git status` between each command to clearly see the actual state of your commit! You can also use the magic command `git log --graph --oneline --all --decorate` to see the actual state of your local and distant repositories in the nicest way!
 
 Be careful, `git rm <file>` exists but it will permanently remove the file from the repository!
 

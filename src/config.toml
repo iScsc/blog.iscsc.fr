@@ -14,6 +14,11 @@ capitalizelisttitles = false  # respect list title case; ex with author: ctmbl s
 # NOTE: If using Disqus as commenting engine, uncomment and configure this line
 # disqusShortname = "yourDisqusShortname"
 
+[markup]
+  defaultMarkdownHandler = 'goldmark'
+[markup.goldmark.renderer]
+    unsafe = true
+
 [params]
     brand = "iScsc"                       # name of your site - appears in the sidebar
     # brand_image = "/images/iscsc.png"   # doesn't exist at the time but could be added :)

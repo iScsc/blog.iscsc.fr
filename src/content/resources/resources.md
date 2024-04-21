@@ -1,8 +1,6 @@
 ---
 title: "Resources"
 summary: "Various resources: links, tutorials, courses, guides... about computer science subjects we like to deal with!"
-date: 2024-04-21T18:10:19+0200
-draft: false
 ---
 
 links:
@@ -42,19 +40,21 @@ TODO:
 <!-- Mandatory blank line-->
 ### Training
 #### RootMe
-<https://www.root-me.org/>
-
+<https://www.root-me.org/>  
 **Description**: 
+
+#### TryHackMe
+<https://tryhackme.com/>  
+**Description**:
 
 #### HackTheBox
-- Home: <https://hackthebox.com>
-- Boxes: <https://app.hackthebox.com>
-
+Home: <https://hackthebox.com>  
+Boxes: <https://app.hackthebox.com>  
 **Description**: 
 
 
-Hackropole
-<https://hackropole.fr/fr/>
+#### Hackropole
+<https://hackropole.fr/fr/>  
 **Description**: 
 
 ### CTF

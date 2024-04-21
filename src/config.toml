@@ -34,6 +34,7 @@ capitalizelisttitles = false  # respect list title case; ex with author: ctmbl s
         # Limit:        If the files should be listed, how many should be shown.
     menu = [
         {Name = "About", URL = "/about/", HasChildren = false},
+        {Name = "Resources", URL = "/resources", HasChildren = false},
         {Name = "Posts", URL = "/posts/", Pre = "Recent", HasChildren = true, Limit = 5},
     ]
 

@@ -1,4 +1,17 @@
+.description {
+    font-style: italic;
+    font-size: 1.15rem;
+    margin-bottom: 2rem;
+}
+
+.resource {
+    background-color: var(--code-block-background-color); /* Not great... TO BE CHANGED */
+    display: inline-block;
+    /*display: block;*/
+    padding: 0.2rem 0.8rem;
+    border-radius: 0.5em;
+}
 .summary {
     font-style: italic;
-    font-size: 1.2em;
+    font-size: 0.9rem;
 }

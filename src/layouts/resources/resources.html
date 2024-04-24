@@ -17,7 +17,6 @@
     {{ with .RegularPages }}
         <h2>Pages</h2>
         {{ range . }}
-            This is a Page: {{ . }} of type {{ .Type }} in section {{ .Section }} <br><br>
             {{ partial "resource.html" . }}
         {{ end }}
     {{ end }}

@@ -75,6 +75,13 @@ When it is done, simply go on the origin repository github page, and you will ha
 
 [Insert image here]
 
+In fact, you should definitely pull request **before** finishing your code. It helps with your work's transparency, but it also allow to receive feedback sooner, which could prevent working several hours on something that is wrong from scratch. You will be able to change your code immediately and it could prevent a lot of frustration on your side.
+Similarly, when working on open source repositories, the owner have the complete right to refuse your change, even if you think your change is right and legitimate. Knowing that it will be refused whatsoever after working an hour on it is definitely easier to accept than after working weeks on your code.
+
+And don't worry, you will be able to keep working on your code even after pull-requesting. You only have to mark your PR as a draft to tell your reviewers you are still working on it by clicking there :
+
+[Insert image here]
+
 ## Update your fork
 
 Once your pull request have been accepted on the remote origin repository, you may update your fork to the new state of the origin repository.

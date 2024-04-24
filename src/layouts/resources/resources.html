@@ -3,19 +3,19 @@
 {{ if .Site.Params.light_dark }}
     {{ partial "light_dark.html" . }}
 {{ end }}
-<div class="post">
+<div class="page">
     <h1 class="page-title">{{ .Title }}</h1>
-    <span class="description">{{ .Params.description }}</span>
+    <span class="iscsc-description">{{ .Params.description }}</span>
 
     {{ with .Sections }}
-        <h2 class="page-title">Sections</h2>
+        <h2>Sections</h2>
         {{ range . }}
             {{ partial "subsection.html" . }}
         {{ end }}
     {{ end }}
 
     {{ with .RegularPages }}
-        <h2 class="page-title">Pages</h2>
+        <h2>Pages</h2>
         {{ range . }}
             This is a Page: {{ . }} of type {{ .Type }} in section {{ .Section }} <br><br>
             {{ partial "resource.html" . }}

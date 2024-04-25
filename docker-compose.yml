@@ -1,5 +1,3 @@
-version: "3.8"
-
 services:
   builder:
     image: floryn90/hugo:0.123.7

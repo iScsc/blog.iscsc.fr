@@ -70,10 +70,21 @@ The certificates should have been generated in `certbot/conf/live/yourdomainname
 
 #### Renew SSL certification
 
-If you just want to renew existing certificates, use:
-
+If you just want to renew existing certificates you should use the designed script:
 ```bash
+./scripts/renewssl.sh
+```
+> Note that this script uses hardcoded absolute path designed for the iScsc VPS
+
+If you want to here are the detailed steps:
+```bash
+# List existing certificates
+docker compose run certbot certificates
+# Renew certificates
 docker compose run --rm certbot renew
+# Restart blog
+docker compose stop blog
+docker compose up --detach blog
 ```
 
 #### Deploy the website itself

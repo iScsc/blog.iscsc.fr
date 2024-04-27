@@ -36,7 +36,7 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: build
-          path: ./build/blog
+          path: ./build/blog/prod
 
   # Deployment job: heavily inspired from https://swharden.com/blog/2022-03-20-github-actions-hugo/
   # /!\ only triggers on (push events AND non-fork repos) OR manually triggered
@@ -60,12 +60,12 @@ jobs:
     steps:
       - name: 🛠️ Setup build directory
         run: |
-          mkdir -p build/blog
+          mkdir -p build/blog/prod
       - name: 📥 Download build Artifacts
         uses: actions/download-artifact@v3
         with:
           name: build
-          path: build/blog
+          path: build/blog/prod
 
       # Create the SSH key file and fill the known_hosts to avoid a prompt from ssh (1st time connecting to remote host)
       - name: 🔐 Create Key File
@@ -83,7 +83,7 @@ jobs:
       # Upload the build to the remote server location: the volume shared by the nginx container serving http requests
       - name: 🚀 Upload
         run: |
-          rsync --archive --stats --verbose --delete ./build/blog/* ${{ secrets.CI_USER_NAME }}@iscsc.fr:${{ secrets.REPO_PATH_ON_REMOTE }}/build/blog
+          rsync --archive --stats --verbose --delete ./build/blog/prod/* ${{ secrets.CI_USER_NAME }}@iscsc.fr:${{ secrets.REPO_PATH_ON_REMOTE }}/build/blog/prod
 
       - name: ⏬ Remote git pull
         run: |

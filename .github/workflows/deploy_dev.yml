@@ -1,0 +1,41 @@
+name: Build and deploy a PR on dev.iscsc.fr
+
+on:
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+jobs:
+  # Build job
+  build-and-deploy-dev:
+    runs-on: ubuntu-latest
+    steps:
+      # Checkout repo AND ITS SUBMODULES
+      - name: 🛒 Checkout
+        uses: actions/checkout@v3
+        with:
+          submodules: recursive
+
+      # Build the static website with the provided docker-compose rules, overriding environment variables to build to /build/blog/dev
+      # Note: /!\ we do not override HUGO_ENV or HUGO_ENVIRONMENT, this is done on purpose to avoid triggering themes' behavior which
+      # are not intended for production and could present security risks
+      - name: 🛠️ Build with HUGO
+        run: |
+          docker compose -e HUGO_DESTINATION=/build/blog/dev up builder --exit-code-from builder
+
+      # Create the SSH key file and fill the known_hosts to avoid a prompt from ssh (1st time connecting to remote host)
+      - name: 🔐 Create Key File
+        run: |
+          mkdir ~/.ssh
+          touch ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+      - name: 🔐 Load Host Keys
+        run: |
+          echo "${{ secrets.SSH_KNOWN_HOSTS }}" > ~/.ssh/known_hosts
+      - name: 🔑 Populate Key
+        run: |
+          echo "${{ secrets.PRIVATE_SSH_KEY }}" > ~/.ssh/id_rsa
+
+      # Upload the build to the remote server location: the volume shared by the nginx container serving http requests
+      - name: 🚀 Upload
+        run: |
+          rsync --archive --stats --verbose --delete ./build/blog/dev/* ${{ secrets.CI_USER_NAME }}@iscsc.fr:${{ secrets.REPO_PATH_ON_REMOTE }}/build/blog/dev

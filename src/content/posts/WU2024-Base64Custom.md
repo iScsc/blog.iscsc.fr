@@ -21,10 +21,10 @@ Pour représenter un string on va écrire à la suite chaque identifiant de chaq
 Ici on veut représenter notre chaîne de charactère en utilisant ASCII (128 charactères) . On représentera donc chaque id sur 7 bits (2^7 = 128 bits).
 0 26 -> 00000 11010
 
-L’encodage en base64, permet de transférer plus facilement des données. En effet, son alphabet est [A..Za..z0..9 ?/], il ne possède donc aucun charactère spéciaux. Il prend en entrée une suite de bits, et les groupes par 6 (il complète avec des 0, à la fin si ca tombe pas juste). 
-	000000 000111 000000 
+L’encodage en base64, permet de transférer plus facilement des données. En effet, son alphabet est [A..Za..z0..9 ?/], il ne possède donc aucun charactère spéciaux. Il prend en entrée une suite de bits, et les groupes par 6 (il complète avec des 0, à la fin si ca tombe pas juste).  
+->	000000 000111 00*0000* 
 
-	Pour avoir la représentation textuelle, on utilise l’alphabet bijection Base64. On a donc un tout autre string. Ici il devient : AHA
+->	Pour avoir la représentation textuelle, on utilise l’alphabet bijection Base64. On a donc un tout autre string. Ici il devient : AHA
 
 ## Etape 2: On attaque le concret.
 On sait que ici, on a pris le FLAG, on l’a mis en base 32 (groupement bits par 5, et à pris sa représentation). On doit donc faire l’étape inverse. On peut en théorie prendre n’importe quelle alphabet mais en analysant la chaîne donnée on remarque que elle est composée des caractères [A..Za..f]. 

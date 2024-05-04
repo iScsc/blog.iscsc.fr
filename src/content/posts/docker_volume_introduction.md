@@ -8,6 +8,8 @@ author: FireFrozen
 draft: false
 ---
 
+*Co-Authored with [ctmbl](https://iscsc.fr/author/ctmbl/)*
+
 Before reading this article, it's recommended to have a minimum knowledge of `docker`.  
 See, for example, the previous blog on docker: [Get Started with Docker](https://iscsc.fr/posts/short-docker-introduction/) by `ctmbl`.
 

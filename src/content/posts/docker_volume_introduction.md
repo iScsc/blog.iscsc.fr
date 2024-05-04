@@ -86,11 +86,17 @@ The code will write transparently to `/opt/${NAME}/logs/<log file>` but because 
 
 ## Resources to go further
 
-TO BE REWORKED:
+About *volumes* VS *bind mounts*:
+- [Manage data in Docker](https://docs.docker.com/storage/)
+- [Choose the right type of mount](https://docs.docker.com/storage/#choose-the-right-type-of-mount)
 
-- [Key differences between volumes and bind mounts](https://docs.docker.com/storage/#volumes)
-  - [Differences between `--volume` and `--mount`](https://docs.docker.com/storage/bind-mounts/#differences-between--v-and---mount-behavior)
-  - [Volumes use cases](https://docs.docker.com/storage/#good-use-cases-for-volumes)
-  - [Bind mounts use cases](https://docs.docker.com/storage/#good-use-cases-for-bind-mounts)
-- [`docker volume` syntax](https://docs.docker.com/storage/volumes/#create-and-manage-volumes)
+About *bind mounts* specifically:
+- [Start a container with a bind mount](https://docs.docker.com/storage/bind-mounts/#start-a-container-with-a-bind-mount)
+- [Bind mounts use cases](https://docs.docker.com/storage/#good-use-cases-for-bind-mounts)
+
+Other sources:
 - [Volumes in Docker compose file](https://docs.docker.com/compose/compose-file/compose-file-v3/#volumes)
+- https://dev.to/doziestar/a-comprehensive-guide-to-docker-volumes-4d9h
+- https://www.baeldung.com/ops/docker-volumes
+- [Never mess with `/var/lib/docker` docker forum](https://forums.docker.com/t/write-from-host-to-volume/47274)
+- [Volumes use cases](https://docs.docker.com/storage/#good-use-cases-for-volumes)

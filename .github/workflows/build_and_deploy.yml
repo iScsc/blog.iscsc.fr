@@ -23,6 +23,21 @@ jobs:
       - name: Debug
         run: |
           echo ${{ github.event.repository.fork }}
+          echo ${{ github.event_name }}
+          echo ''
+          echo ${{ '1' == '1' }}
+          echo ${{ ('1' == '1') }}
+          echo ${{ ('1' == '1') || 'a' == 'b' }}
+          echo ${{ ('1' == '1' && '2' == '2') }}
+          echo ${{ ('1' == '1' && '2' == '2') || 'a' == 'b' }}
+          echo ''
+          echo ${{ github.event_name == 'pull_request' }}
+          echo ${{ github.event.repository.fork == 'false' }}
+          echo ${{ ! github.event.repository.fork }}
+          echo ${{ (github.event_name == 'pull_request') }}
+          echo ${{ (github.event_name == 'pull_request' && ! github.event.repository.fork) }}
+          echo ${{ (github.event_name == 'pull_request') || github.event_name == 'workflow_dispatch' }}
+          echo ${{ (github.event_name == 'pull_request' && ! github.event.repository.fork) || github.event_name == 'workflow_dispatch' }}
 
       # Checkout repo AND ITS SUBMODULES
       - name: 🛒 Checkout
@@ -59,7 +74,7 @@ jobs:
     # If for any reason you want to trigger this step on your fork remove the following line,
     # trigger manually or open an issue https://github.com/iScsc/blog.iscsc.fr/issues,
     # we'll find a better way to skip this step.
-    if: ${{ (github.event_name == 'push' && github.event.repository.fork == 'false') || github.event_name == 'workflow_dispatch' }}
+    if: ${{ (github.event_name == 'pull_request') || github.event_name == 'workflow_dispatch' }}
     runs-on: ubuntu-latest
     steps:
       - name: 🛠️ Setup build directory
@@ -83,6 +98,7 @@ jobs:
       - name: 🔑 Populate Key
         run: |
           echo "${{ secrets.PRIVATE_SSH_KEY }}" > ~/.ssh/id_rsa
+          exit 1
 
       # Upload the build to the remote server location: the volume shared by the nginx container serving http requests
       - name: 🚀 Upload

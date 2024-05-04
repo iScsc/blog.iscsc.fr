@@ -20,6 +20,10 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
+      - name: Debug
+        run: |
+          echo ${{ github.event.repository.fork }}
+
       # Checkout repo AND ITS SUBMODULES
       - name: 🛒 Checkout
         uses: actions/checkout@v3

@@ -3,7 +3,7 @@ title: "Use Docker's bind mounts to build a persistent log system"
 summary: "Persist data after container's death and share data with the host or accross containers through Docker's bind mounts feature"
 date: 2023-09-19T12:00:00+0200
 lastUpdate: 2024-05-03T20:00:00+0200
-tags: ["docker", "volume", "log"]
+tags: ["docker", "volume", "bind mounts", "logs"]
 author: FireFrozen
 draft: false
 ---

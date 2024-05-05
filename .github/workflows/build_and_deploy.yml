@@ -20,6 +20,11 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
+      - name: Debug
+        run: |
+          echo "github.event.repository.fork = ${{ github.event.repository.fork }}"
+          echo "github.event_name = ${{ github.event_name }}"
+
       # Checkout repo AND ITS SUBMODULES
       - name: 🛒 Checkout
         uses: actions/checkout@v3
@@ -39,7 +44,7 @@ jobs:
           path: ./build/blog
 
   # Deployment job: heavily inspired from https://swharden.com/blog/2022-03-20-github-actions-hugo/
-  # /!\ only triggers on (push events AND non-fork repos) OR manually triggered
+  # /!\ only triggers on (push events AND NOT fork repos) OR manually triggered
   ## Required secrets:
   #   - SSH_KNOWN_HOSTS
   #   - PRIVATE_SSH_KEY
@@ -55,7 +60,7 @@ jobs:
     # If for any reason you want to trigger this step on your fork remove the following line,
     # trigger manually or open an issue https://github.com/iScsc/blog.iscsc.fr/issues,
     # we'll find a better way to skip this step.
-    if: ${{ (github.event_name == 'push' && github.event.repository.fork == 'false') || github.event_name == 'workflow_dispatch' }}
+    if: ${{ (github.event_name == 'push' && ! github.event.repository.fork) || github.event_name == 'workflow_dispatch' }}
     runs-on: ubuntu-latest
     steps:
       - name: 🛠️ Setup build directory

@@ -11,7 +11,9 @@ services:
       - HUGO_ENVIRONMENT=production
     volumes:
       - ./src:/src:rw
-      - ./build/blog:/build/blog:rw
+      # The container is mode-agnostique: it always builds in /build/blog
+      # the volume shared on the host side determines where it should go
+      - ./build/blog/prod:/build/blog:rw
 
   blog:
     build:

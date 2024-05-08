@@ -35,7 +35,7 @@ jobs:
       - name: 🚀 Upload Artifacts
         uses: actions/upload-artifact@v3
         with:
-          name: build
+          name: prod-build
           path: ./build/blog/prod
 
   # Deployment job: heavily inspired from https://swharden.com/blog/2022-03-20-github-actions-hugo/
@@ -64,7 +64,7 @@ jobs:
       - name: 📥 Download build Artifacts
         uses: actions/download-artifact@v3
         with:
-          name: build
+          name: prod-build
           path: build/blog/prod
 
       # Create the SSH key file and fill the known_hosts to avoid a prompt from ssh (1st time connecting to remote host)

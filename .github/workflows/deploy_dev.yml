@@ -20,6 +20,10 @@ jobs:
         with:
           submodules: recursive
 
+      - name: 💉 Inject Development Banner
+        run: |
+          cat ./development_banner.html >> ./src/themes/poison/layouts/partials/sidebar/sidebar.html
+
       # Build the static website with the provided docker-compose rules, overriding environment variables to build to /build/blog/dev
       # Note: /!\ we do not override HUGO_ENV or HUGO_ENVIRONMENT, this is done on purpose to avoid triggering themes' behavior which
       # are not intended for production and could present security risks

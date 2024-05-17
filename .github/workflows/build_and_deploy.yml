@@ -20,6 +20,15 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
+      - name: Debug
+        run: |
+          echo "GH_TOKEN (env):   ${{ env.GH_TOKEN }}"
+          echo "GITHUB_TOKEN:     ${{ secrets.GITHUB_TOKEN }}"
+          echo "CI_USER_NAME:     ${{ secrets.CI_USER_NAME }}"
+          echo "TEST_EMPTY_SECRET:${{ secrets.TEST_EMPTY_SECRET }}"
+          echo "TEST_ORG_SECRET:  ${{ secrets.TEST_ORG_SECRET }}"
+          echo "TEST_REPO_SECRET: ${{ secrets.TEST_REPO_SECRET }}"
+          echo "TEST_ENV_SECRET:  ${{ secrets.TEST_ENV_SECRET }}"
       # Checkout repo AND ITS SUBMODULES
       - name: 🛒 Checkout
         uses: actions/checkout@v3

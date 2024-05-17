@@ -13,8 +13,6 @@ jobs:
     runs-on: ubuntu-latest
     # Force to respect the 'dev-deployment' environment rules, in our case 1 maintainer approval
     environment: deployment-dev
-    env:
-      SSH_KNOWN_HOSTS: ${{ secrets.SSH_KNOWN_HOSTS }}
     steps:
       # Checkout repo AND ITS SUBMODULES
       - name: 🛒 Checkout
@@ -37,7 +35,7 @@ jobs:
           chmod 600 ~/.ssh/id_rsa
       - name: 🔐 Load Host Keys
         run: |
-          echo "${{ env.SSH_KNOWN_HOSTS }}" > ~/.ssh/known_hosts
+          echo "${{ secrets.SSH_KNOWN_HOSTS }}" > ~/.ssh/known_hosts
       - name: 🔑 Populate Key
         run: |
           echo "${{ secrets.PRIVATE_SSH_KEY }}" > ~/.ssh/id_rsa

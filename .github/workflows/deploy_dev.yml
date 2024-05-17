@@ -25,7 +25,7 @@ jobs:
       # are not intended for production and could present security risks
       - name: 🛠️ Build with HUGO
         run: |
-          docker compose run -v ./build/blog/dev:/build/blog:rw builder --logLevel info --baseURL="https://dev.iscsc.fr" --buildFuture
+          docker compose -f docker-compose.yml -f docker-compose.dev.yml run builder
 
       # Create the SSH key file and fill the known_hosts to avoid a prompt from ssh (1st time connecting to remote host)
       - name: 🔐 Create Key File

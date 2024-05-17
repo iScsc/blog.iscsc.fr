@@ -1,0 +1,9 @@
+version: "3.8"
+
+services:
+  builder:
+    command: --logLevel info --baseURL="https://dev.iscsc.fr" --buildFuture
+    volumes:
+      # The container is mode-agnostique: it always builds in /build/blog
+      # the volume shared on the host side determines where it should go
+      - ./build/blog/dev:/build/blog:rw

@@ -22,13 +22,6 @@ jobs:
     steps:
       - name: Debug
         run: |
-          echo "GH_TOKEN (env):   ${{ env.GH_TOKEN }}"
-          echo "GITHUB_TOKEN:     ${{ secrets.GITHUB_TOKEN }}"
-          echo "CI_USER_NAME:     ${{ secrets.CI_USER_NAME }}"
-          echo "TEST_EMPTY_SECRET:${{ secrets.TEST_EMPTY_SECRET }}"
-          echo "TEST_ORG_SECRET:  ${{ secrets.TEST_ORG_SECRET }}"
-          echo "TEST_REPO_SECRET: ${{ secrets.TEST_REPO_SECRET }}"
-          echo "TEST_ENV_SECRET:  ${{ secrets.TEST_ENV_SECRET }}"
           echo "github.event.repository.fork = ${{ github.event.repository.fork }}"
           echo "github.event_name = ${{ github.event_name }}"
 

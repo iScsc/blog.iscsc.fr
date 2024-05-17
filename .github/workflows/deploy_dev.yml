@@ -12,6 +12,7 @@ jobs:
   build-and-deploy-dev:
     runs-on: ubuntu-latest
     # Force to respect the 'dev-deployment' environment rules, in our case 1 maintainer approval
+    environment: deployment-dev
     env:
       SSH_KNOWN_HOSTS: ${{ secrets.SSH_KNOWN_HOSTS }}
     steps:

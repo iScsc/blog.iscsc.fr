@@ -4,7 +4,8 @@ on:
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
-  # Allows
+  # Trigger the workflow on every pull request, but because of the environment (later defined)
+  # it will require manual approval to run
   pull_request:
 
 jobs:
@@ -24,9 +25,7 @@ jobs:
         run: |
           cat ./development_banner.html >> ./src/themes/poison/layouts/partials/sidebar/sidebar.html
 
-      # Build the static website with the provided docker-compose rules, overriding environment variables to build to /build/blog/dev
-      # Note: /!\ we do not override HUGO_ENV or HUGO_ENVIRONMENT, this is done on purpose to avoid triggering themes' behavior which
-      # are not intended for production and could present security risks
+      # Build the static website with the provided docker-compose rules, overriding some elements, see docker-compose.dev.yml
       - name: 🛠️ Build with HUGO
         run: |
           docker compose -f docker-compose.yml -f docker-compose.dev.yml run builder

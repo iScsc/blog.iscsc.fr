@@ -89,11 +89,12 @@ docker compose up --detach blog
 
 #### Deploy the website itself
 
-Create the blog/prod directory, **it must be writable by users that will write to it: you, builder target, CI user...**
+Create the blog/prod and blog/dev directory, **they must be writable by the user/group that will write to it: you, builder target, CI user...**
 ```sh
 mkdir -p build/blog/prod
-chmod <make it writable by the appropriate user/group>
-chown <make it owned by the appropriate user/group>
+mkdir -p build/blog/dev
+sudo chown -R <user>:<group> build/blog
+sudo chmod -R g+w build/blog
 ```
 
 > you should check first the consistency of the server name (iscsc.fr/localhost) in those files: `nginx.conf`, ...
@@ -104,11 +105,17 @@ docker compose build blog
 docker compose up --detach blog
 ```
 
-> Note: before the next step make sure that when cloning the repository you also updated the git submodule!
+> Note: before the next step make sure that when cloning the repository you also fetched the git submodule!
 
-Then builds the static website, `./build/blog/prod` is a volume shared with both containers so building the website will automatically "update" it for nginx.
+Then build the static website, `./build/blog/prod` is a volume shared with both containers so building the website will automatically "update" it for nginx.
 ```sh
 docker compose up builder
+```
+
+After doing this last step, files might have been created with the wrong permissions/owners (it depends if you use the setgid bit, modify the builder container, and even what YOU consider being the right permissions/owners). If needed you might re-do what we've previously:
+```sh
+sudo chown -R <user>:<group> build/blog
+sudo chmod -R g+w build/blog
 ```
 
 ### Automatic deployment

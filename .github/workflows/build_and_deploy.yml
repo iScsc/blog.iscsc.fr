@@ -107,7 +107,7 @@ jobs:
 
       # Get the list of added, changed, removed, and renamed files
       - name: 📑 Get changed files
-        uses: jitterbit/get-changed-files@v1
+        uses: masesgroup/retrieve-changed-files@v3
         id: files
         with:
           format: space-delimited

@@ -1,5 +1,3 @@
-version: "3.8"
-
 services:
   builder:
     command: --logLevel info --baseURL="https://dev.iscsc.fr" --buildFuture

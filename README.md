@@ -70,11 +70,11 @@ docker compose run --rm certbot renew
 
 #### Deploy the website itself
 
-Create the blog directory, **it must be writable by users that will write to it: you, builder target, CI user...**
+Create the blog/prod directory, **it must be writable by users that will write to it: you, builder target, CI user...**
 ```sh
-mkdir build/blog
+mkdir -p build/blog/prod
 chmod <make it writable by the appropriate user/group>
-chmown <make it owned by the appropriate user/group>
+chown <make it owned by the appropriate user/group>
 ```
 
 > you should check first the consistency of the server name (iscsc.fr/localhost) in those files: `nginx.conf`, ...
@@ -87,8 +87,7 @@ docker compose up --detach blog
 
 > Note: before the next step make sure that when cloning the repository you also updated the git submodule!
 
-Then builds the static website, `./build/blog` is a volume shared with both containers so 
-building the website will automatically "update" it for nginx.
+Then builds the static website, `./build/blog/prod` is a volume shared with both containers so building the website will automatically "update" it for nginx.
 ```sh
 docker compose up builder
 ```

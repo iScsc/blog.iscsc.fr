@@ -20,6 +20,11 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
+      - name: Debug
+        run: |
+          echo "github.event.repository.fork = ${{ github.event.repository.fork }}"
+          echo "github.event_name = ${{ github.event_name }}"
+
       # Checkout repo AND ITS SUBMODULES
       - name: 🛒 Checkout
         uses: actions/checkout@v3
@@ -35,24 +40,37 @@ jobs:
       - name: 🚀 Upload Artifacts
         uses: actions/upload-artifact@v3
         with:
-          name: build
-          path: ./build/blog
+          name: prod-build
+          path: ./build/blog/prod
 
   # Deployment job: heavily inspired from https://swharden.com/blog/2022-03-20-github-actions-hugo/
-  # /!\ only triggers on push events and manually triggered
+  # /!\ only triggers on (push events AND NOT fork repos) OR manually triggered
+  ## Required secrets:
+  #   - SSH_KNOWN_HOSTS
+  #   - PRIVATE_SSH_KEY
+  #   - CI_USER_NAME
+  #   - REPO_PATH_ON_REMOTE
   deploy:
     needs: [build]
-    if: ${{ github.event_name == 'push' || github.event_name == 'workflow_dispatch' }}
+    # DISCLAIMER:
+    # The following is a very POOR solution to avoid *failing deploy step* due to missing secrets
+    # on fork repositories, but sadly the `env` context is not accessible from `jobs.<job_id>.if`:
+    # https://docs.github.com/en/actions/learn-github-actions/contexts#context-availability
+    #
+    # If for any reason you want to trigger this step on your fork remove the following line,
+    # trigger manually or open an issue https://github.com/iScsc/blog.iscsc.fr/issues,
+    # we'll find a better way to skip this step.
+    if: ${{ (github.event_name == 'push' && ! github.event.repository.fork) || github.event_name == 'workflow_dispatch' }}
     runs-on: ubuntu-latest
     steps:
       - name: 🛠️ Setup build directory
         run: |
-          mkdir -p build/blog
+          mkdir -p build/blog/prod
       - name: 📥 Download build Artifacts
         uses: actions/download-artifact@v3
         with:
-          name: build
-          path: build/blog
+          name: prod-build
+          path: build/blog/prod
 
       # Create the SSH key file and fill the known_hosts to avoid a prompt from ssh (1st time connecting to remote host)
       - name: 🔐 Create Key File
@@ -70,7 +88,11 @@ jobs:
       # Upload the build to the remote server location: the volume shared by the nginx container serving http requests
       - name: 🚀 Upload
         run: |
-          rsync --archive --stats --verbose --delete ./build/blog/* ${{ secrets.CI_USER_NAME }}@iscsc.fr:${{ secrets.STATIC_WEBSITE_PATH}}
+          rsync --archive --stats --verbose --delete ./build/blog/prod/* ${{ secrets.CI_USER_NAME }}@iscsc.fr:${{ secrets.REPO_PATH_ON_REMOTE }}/build/blog/prod
+
+      - name: ⏬ Remote git pull
+        run: |
+          ssh ${{ secrets.CI_USER_NAME }}@iscsc.fr /usr/bin/bash ${{ secrets.REPO_PATH_ON_REMOTE }}/scripts/remote_git_pull.sh ${{ secrets.REPO_PATH_ON_REMOTE }}
 
   # Finally notify of the new article (if any) on the iScsc discord server
   # action jitterbit/get-changed-files@v1 doesn't support 'workflow_dispatch' events: https://github.com/jitterbit/get-changed-files/issues/38

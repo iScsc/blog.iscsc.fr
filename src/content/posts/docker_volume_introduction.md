@@ -30,7 +30,7 @@ In Docker, two ways exist to persist/share data: **volumes** (named and anonymou
 
 What we're talking about in this blog aren't volumes at all, they are bind mounts.  
 We'll name them *bind mounts* **but be aware that** often on Internet you'll encounter the word *volume* while the author is actually speaking of a bind mount.  
-This is certainly due to the fact that **options `-volume` and `--mount` can be used almost interchangeably**.  
+This is certainly due to the fact that **options `--volume` and `--mount` can be used almost interchangeably**.  
 
 > Even in [docker's doc the naming is confusing](https://docs.docker.com/storage/volumes/#differences-between--v-and---mount-behavior)
 

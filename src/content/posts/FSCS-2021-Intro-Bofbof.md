@@ -1,23 +1,25 @@
 ---
-title: "write-up : bofbof (FCSC intro 2021)"
-date: 2024-02-14
-#draft: true
+title: "Bofbof (intro pwn) Write-Up CTF FCSC 2021"
+summary: "Bonne introduction aux stack buffer overflow classiques sur thème d'OSS 117"
+date: 2024-02-14T20:00:00+0100
+lastUpdate: 2024-06-03T18:13:53+0200
+tags: ["pwn", "introduction", "write-up", "FR"]
+author: "Tristan Baldit"
 draft: false
-tags: ["iscsc","blog","posts"]
 ---
 
 ## Présentation du challenge
 
 Le challenge contient :  
-`docker-compose.yml` : un fichier de configuration permettant d'accéder à un conteneur docker en local  
-`bofbof` : un executable ELF x64, dynamically linked & not stripped 
+- `docker-compose.yml`: un fichier de configuration permettant d'accéder à un conteneur docker en local
+- `bofbof`: un executable ELF x64, dynamically linked & not stripped
 
 L'objectif du challenge est d'accéder au fichier `flag.txt` présent sur le docker.  
 Le seul problème ? Le programme `bofbof` tourne déja sur le docker.  
 
 ## Première approche : étude de `bofbof`
 
-Commençons par lancer `bofbof` : 
+Commençons par lancer `bofbof` (pensez à render le fichier éxecutable au préalable avec `chmod u+x bofbof`):
 
 ```
 Comment est votre blanquette ?
@@ -25,7 +27,7 @@ Comment est votre blanquette ?
 ```
 
 Le programme demande une entrée utilisateur, rentrons `AAAAAA`.  
-Cela ferme tout simplement le programme ... la solution serait donc un stack buffer overflow ?
+Cela ferme tout simplement le programme... la solution serait donc un stack buffer overflow ?
 
 Regardons maintenant ce que donne `strings bofbof` : 
 
@@ -122,11 +124,11 @@ __cxa_finalize@GLIBC_2.2.5
 
 ```
 
-On remarque plusieurs choses intéressantes, premièrement `bofbof` utilise la fonction `gets` : l'idée est donc bien 
-de faire un stack buffer overflow ! De plus on remarque la présence de `system` et de `vuln` : l'executable contient 
-une "faille" et semble capable d'accéder au système du conteneur et ainsi au `flag.txt`.
+On remarque plusieurs choses intéressantes, premièrement `bofbof` utilise la fonction `gets`: cette fonction est extrêmement vulnérable car elle prend une entrée utilisateur sans limite de taille, au point où `gcc` émet un warning quand elle est utilisée.
+L'idée est donc bien de faire un stack buffer overflow !
+De plus on remarque la présence de `system` et de `vuln`: l'executable contient une "faille" et semble capable d'accéder au système du conteneur et ainsi au `flag.txt`.
 
-Essayons maintenant de lancer `bofbof` et cette fois de faire un buffer overflow :
+Essayons maintenant de lancer `bofbof` et cette fois de provoquer un buffer overflow :
 
 ```
 Comment est votre blanquette ?
@@ -148,7 +150,7 @@ D'accord donc le problème est plus fin qu'un overflow basique, passons aux chos
 Commençons par objdump, ce qui nous donne le disassembly de `vuln` et `main` de `bofbof` :
 
 ```
-objdump -d bofbof
+$ objdump -d bofbof
 
 0000000000001185 <vuln>:
     1185:       55                      push   %rbp
@@ -258,6 +260,9 @@ On a donc l'emplacement du buffer dans la stack et surtout son emplacement relat
 Ainsi, il faut rentrer par exemple `"A"*40 + 0x1122334455667788` pour réécrire correctement `-0x8(%rbp)`.
 
 Il suffit maintenant d'effectuer ceci sur le conteneur docker et pour cela, nous allons utiliser un script python.
+
+> Dans le cas d'un CTF le conteneur tourne sur un serveur du CTF, ici on peut le lancer localement avec `docker compose up --detach` (dans le dossier où se trouve le `docker-compose.yml`).  
+> Pour arrêter le conteneur: `docker compose down` :wink:
 
 ## Le script
 

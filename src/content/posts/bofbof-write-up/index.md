@@ -246,15 +246,15 @@ Lors de la seconde il vaut `0x1122334455667788`.
 Maintenant tentons de comprendre ce que vaut `-0x8(%rbp)` pour cela lançons `gdb` et plaçons nous juste avant l'appel à
 `gets` :
 
-![](../../data/wu3.png)
-![](../../data/wu.png)
+![](bofbof-write-up-1.png)
+![](bofbof-write-up-2.png)
 
 On a donc la valeur actuelle de `-0x8(%rbp)` et c'est celle-ci qu'il va falloir changer, l'objectif est donc d'y écrire 
 `0x1122334455667788` pour que le programme ne prenne aucun des deux sauts.
 
 Avançons donc d'une instruction pour voir où se trouve le buffer issu de `gets` :
 
-![](../../data/wu4.png)
+![](bofbof-write-up-3.png)
 
 On a donc l'emplacement du buffer dans la stack et surtout son emplacement relatif par rapport à `rbp` (différence de `0x38`).  
 Ainsi, il faut rentrer par exemple `"A"*40 + 0x1122334455667788` pour réécrire correctement `-0x8(%rbp)`.
@@ -282,6 +282,6 @@ target.interactive()                    ## laisse le terminal du docker ouvert
 
 Lançons `bofbof.py` et regardons ce que cela donne : 
 
-![](../../data/wu6.png)
+![](bofbof-write-up-4.png)
 
 On a donc réussi à accéder à un terminal et `cat flag.txt` permet d'accéder à `flag.txt`.

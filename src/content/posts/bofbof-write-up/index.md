@@ -197,7 +197,7 @@ $ objdump -d bofbof
     122d:       0f 1f 00                nopl   (%rax)
 ```
 
-Ici, c'est surtout le `main` qui nous va nous intéresser on remarque premièrement l'appel à `vuln` :
+Ici, c'est surtout le `main` qui va nous intéresser on remarque premièrement l'appel à `vuln` :
 
 
 ```

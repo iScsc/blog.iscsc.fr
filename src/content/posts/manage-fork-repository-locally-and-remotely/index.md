@@ -1,8 +1,8 @@
 ---
 title: "Manage fork repository locally and remotely"
-summary: "TODO"
+summary: "Learn how to make and use forks in order to contribute to public repositories or for your own curiosity!"
 date: 2024-04-16T20:00:00-02:00
-lastUpdate: 2024-06-03T23:04:17+0200
+lastUpdate: 2024-06-10T09:09:11+0200
 tags: ["git", "github"]
 author: Zyno
 draft: false
@@ -36,7 +36,7 @@ We can see the original repository it has been forked from, and you can quickly 
 
 ## Working with forks
 
-Now that you have created your own fork, you simply have to experiment on your fork!
+Now that you have created your own fork, you simply have to experiment on it!
 
 First, clone your fork on your computer with the link of your repository.
 
@@ -63,13 +63,13 @@ When this is done, you can start working on your code!
 
 Once you have finished your work - or your session - don't forget to commit your changes after adding your new changes! To do so, first check the differences between your local repository and the remote one with `git status` and `git diff`
 
-Then, you can selectively chose which files you want to add to your commit with `git add <file1> <file2> ...` or you can add them all with `git add .` (but you shouldn't, this is really bad practice).
+Then, you can selectively chose which files you want to add to your commit with `git add <file1> <file2> ...` or you can add them all with `git add .` (but **you shouldn't**, this is really **bad practice**).
 
 If you have made a mistake, you can revert a `git add` by using `git reset <file1> <file2> ...` or `git reset` to unstage them all. This will keep your local changes.
 
 Don't hesitate to use `git status` between each command to clearly see the actual state of your changes. You can also use the magic command `git log --graph --oneline --all --decorate` to see the actual state of your local and distant repositories in the nicest way!
 
-Be careful, `git rm <file>` exists but it will permanently remove the file from the repository!
+> Be careful, `git rm <file>` exists but it will **permanently** remove the file from the repository!
 
 When you have finished staging all your changes, you can commit by using the `commit` command:
 ```
@@ -118,3 +118,9 @@ To do so, you shall :
   * 2.1 - `git fetch origin`: To download the remote state of the repository to your local github (you may now see it with the git log command we talked about above)
   * 2.2 - `git checkout main`: To put your git `HEAD` on your `main` branch
   * 2.3 - `git rebase origin/main`: To move your local main to remote reference you have just downloaded
+
+## Conclusion
+
+Now you know everything you need to start working with forks. Don't hesitate to do so on the [Iscsc repositories](https://github.com/iScsc) if you want to participate in the development of the club!
+
+And if you need more information, don't hesitate to read the [GitHub dedicated article](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/working-with-forks/fork-a-repo)!

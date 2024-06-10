@@ -121,6 +121,6 @@ To do so, you shall :
 
 ## Conclusion
 
-Now you know everything you need to start working with forks. Don't hesitate to do so on the [Iscsc repositories](https://github.com/iScsc) if you want to participate in the development of the club!
+Now you know everything you need to start working with forks. Don't hesitate to do so on the [iScsc repositories](https://github.com/iScsc) if you want to participate in the development of the club!
 
 And if you need more information, don't hesitate to read the [GitHub dedicated article](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/working-with-forks/fork-a-repo)!

@@ -96,7 +96,7 @@ To do so, you must first push your branch to the remote repository.
 When it is done, go on the origin repository GitHub page, and you will have the possibility to Pull Request your changes.
 
 ![](create-pull-request-1.png)
-> You should see this banner on the GitHub page of your fork and the original repository, it doesn't matter
+> You should see this banner on the GitHub page of your fork and the original repository. You can click on either one.
 
 In fact, you should definitely Pull Request **before** finishing your code, and there is numerous reason to that.  
 It helps with your work's transparency, but it also allows you to receive feedback sooner, which could prevent working several hours on something that is wrong from scratch. You will be able to change your code immediately and it could prevent a lot of frustration on your side.  

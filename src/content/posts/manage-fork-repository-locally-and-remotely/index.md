@@ -8,6 +8,8 @@ author: Zyno
 draft: false
 ---
 
+*Co-Authored with [ctmbl](https://iscsc.fr/author/ctmbl/)*
+
 ## What are forks ?
 
 ### A quick explanation

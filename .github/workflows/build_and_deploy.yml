@@ -27,7 +27,7 @@ jobs:
 
       # Checkout repo AND ITS SUBMODULES
       - name: 🛒 Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           submodules: recursive
 
@@ -38,7 +38,7 @@ jobs:
 
       # Upload build artifacts for deployment or download
       - name: 🚀 Upload Artifacts
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: prod-build
           path: ./build/blog/prod
@@ -67,7 +67,7 @@ jobs:
         run: |
           mkdir -p build/blog/prod
       - name: 📥 Download build Artifacts
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           name: prod-build
           path: build/blog/prod
@@ -103,11 +103,11 @@ jobs:
     steps:
       # Checkout repo, no need to checkout submodule
       - name: 🛒 Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       # Get the list of added, changed, removed, and renamed files
       - name: 📑 Get changed files
-        uses: jitterbit/get-changed-files@v1
+        uses: masesgroup/retrieve-changed-files@v3
         id: files
         with:
           format: space-delimited

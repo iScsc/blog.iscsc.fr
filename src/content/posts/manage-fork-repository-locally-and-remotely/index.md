@@ -2,7 +2,7 @@
 title: "Manage fork repository locally and remotely"
 summary: "Learn how to make and use forks in order to contribute to public repositories or for your own curiosity!"
 date: 2024-04-16T20:00:00-02:00
-lastUpdate: 2024-06-10T09:09:11+0200
+lastUpdate: 2024-06-13T19:46:11+0200
 tags: ["git", "github"]
 author: Zyno
 draft: false
@@ -16,7 +16,7 @@ draft: false
 
 To make it simple, forks are copies of a repository you want to work on. This way, you can work on your version of the repository, create branches, experiment stuff, commit and pull request.
 
-On many repositories you will not have the write access. Yet, you can still propose changes by forking the repository, working on it, and when finished, pull requesting the original repository you made the fork from.
+On many repositories you will not have the write access. Yet, you can still propose changes by forking the repository, working on it, and when finished, opening a pull request on the original repository you made the fork from.
 
 ### How to make one
 
@@ -88,19 +88,20 @@ git push origin <your_branch>
 
 > `git` commands are also integrated into some code editors such as `VS code`, but you should know that it may sometimes do some strange things, and using the terminal commands may make it easier to understand what really happens
 
-## Pull requesting
+## Open a Pull Request
 
-When you have a first version of your code and you want to propose your changes to the origin repository, you will need to pull request.
+When you have a first version of your code and you want to propose your changes to the origin repository, you will need to open a pull request.
 
 To do so, you must first push your branch to the remote repository.  
-When it is done, go on the origin repository GitHub page, and you will have the possibility to Pull Request your changes.
+When it is done, go on the origin repository GitHub page, and you will have the possibility to open a Pull Request to merge your changes.
 
 ![](create-pull-request-1.png)
 > You should see this banner on the GitHub page of your fork and the original repository. You can click on either one.
 
-In fact, you should definitely Pull Request **before** finishing your code, and there is numerous reason to that.  
-It helps with your work's transparency, but it also allows you to receive feedback sooner, which could prevent working several hours on something that is wrong from scratch. You will be able to change your code immediately and it could prevent a lot of frustration on your side.  
+In fact, you should definitely open your Pull Request **before** finishing your code, and there are several reasons for that.  
+It helps with your work's transparency, but it also allows you to ask for feedback sooner, which could prevent working several hours on something that is wrong from scratch. You will be able to change your code immediately and it could prevent a lot of frustration on your side.
 Similarly, when working on open source repositories, the owner have the complete right to refuse your change, even if you think your change is right and legitimate. Knowing that it will be refused whatsoever after working an hour on it is definitely easier to accept than after working weeks on your code.
+> When working on public repositories, but also on your own, it is often a better practice to start by submitting an issue to discuss about it first and informing people about it. When working on huge PRs, it is very important to open it early in order to tell people you are working on it! Just don't forget to set it as a draft (see below), and ask for reviews when needed!
 
 And don't worry, you will be able to keep working on your code even after pull-requesting, just create other commits and push as we did before.
 

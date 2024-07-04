@@ -33,3 +33,8 @@ jobs:
         run: |
           cd ./scripts/
           pytest
+      
+      - name: Test
+        uses: |
+          echo ${{github.event.pull_request.head.ref}}
+          echo ${{github.event.pull_request.head.repo.full_name}}

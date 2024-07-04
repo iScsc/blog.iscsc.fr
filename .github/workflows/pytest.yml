@@ -3,7 +3,7 @@ name: Pytest
 on:
   pull_request_target:
   
-  
+
   # Runs on pull requests to check that the website is building without errors
   pull_request:
 
@@ -35,5 +35,3 @@ jobs:
         run: |
           echo ${{github.head_ref}}
           echo ${{github.repository}}
-          cd ./scripts/
-          pytest

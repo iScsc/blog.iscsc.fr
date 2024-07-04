@@ -6,7 +6,7 @@ on:
 
   # Trigger the workflow on every pull request, but because of the environment (later defined)
   # it will require manual approval to run
-  pull_request:
+  pull_request_target:
 
 jobs:
   # Build job
@@ -20,6 +20,8 @@ jobs:
         uses: actions/checkout@v3
         with:
           submodules: recursive
+          ref: ${{github.event.pull_request.head.ref}}
+          repository: ${{github.event.pull_request.head.repo.full_name}}
 
       - name: 💉 Inject Development Banner
         run: |

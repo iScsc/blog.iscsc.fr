@@ -1,6 +1,8 @@
 name: Pytest
 
 on:
+  pull_request:
+
   # Runs on pull requests to check that the website is building without errors
   pull_request_target:
 
@@ -8,7 +10,6 @@ on:
   push:
     branches:
       - main
-      - Fork-Article
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:

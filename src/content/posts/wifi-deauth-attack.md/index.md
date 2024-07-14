@@ -2,14 +2,14 @@
 
 ## Abstract
 
-**Initial State:** A Client is connected to a ***password Securised Wifi***
+**Initial State:** A Client is connected to a ***password securised Wifi***
 
 The goal is to get the wifi password.  
-To acheivied it:  
+To acheive this we must:  
 1) Detect WiFi
 2) Detect connected computer to this WiFi
 3) Send a huge quantity of package to this computer to make it disconnect from the WiFi
-4) Get Password Hash when it try to reconnect to WiFi
+4) Get Password Hash when it tries to reconnect to WiFi
 5) BrutForce it :)
 
 ## Network Package Structure
@@ -105,6 +105,4 @@ Choose your dictionnary, **rockyou.txt** by default.
 
 The harder thing to do is to force victim to reconnect. Sometime, victim OS does not reconnect automatically.  
 
-Use stenght password to protect your WiFi or use WPA3 protocol (hash function harder to calculate => lower hash rate)
-
-It makes brutforce method less efficient
+Use strong passwords to protect your WiFi or use WPA3 protocol (hash function harder to calculate => lower hash rate). It makes the bruteforce method less efficient.

@@ -16,6 +16,10 @@
     border-radius: 0.5em;
 }
 
+.iscsc-resource a {
+    font-size: 0.8rem;
+}
+
 .iscsc-summary {
     font-style: italic;
     font-size: 0.9rem;

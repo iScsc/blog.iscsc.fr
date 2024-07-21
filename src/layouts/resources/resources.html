@@ -1,0 +1,27 @@
+{{ define "main" -}}
+
+{{ if .Site.Params.light_dark }}
+    {{ partial "light_dark.html" . }}
+{{ end }}
+<div class="page">
+    <h1 class="page-title">{{ .Title }}</h1>
+    <span class="iscsc-description">{{ .Params.description }}</span>
+
+    {{ with .Sections }}
+        <h2>Sections</h2>
+        {{ range . }}
+            {{ partial "subsection.html" . }}
+        {{ end }}
+    {{ end }}
+
+    {{ with .RegularPages }}
+        <h2>Pages</h2>
+        {{ range . }}
+            {{ partial "resource.html" . }}
+        {{ end }}
+    {{ end }}
+    {{ if (.Site.Params.listmonk) }}
+        {{ partial "post/listmonk_email_newsletters.html" . }}
+    {{ end }}
+</div>
+{{ end }}

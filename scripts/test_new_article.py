@@ -40,6 +40,26 @@ def test_new_article_file(mock_requests_post):
         }
     )
 
+
+def test_new_article_file_upper_case(mock_requests_post):
+    # Add an article with an Upper case --> URL should be lower case
+    new_article.main(["test_resources/Article-2.md"])
+
+    mock_requests_post.assert_called_once_with(
+        'http://iscsc.fr:8001/new-blog',
+        json={
+            'title': 'article title',
+            'summary': 'article name contains an upper case letter',
+            'date': '2024-05-05 12:00:00+02:00',
+            'lastUpdate': '2024-05-05 12:00:00+02:00',
+            'tags': "['some', 'tags']",
+            'author': 'ctmbl',
+            'draft': False,
+            'url': 'https://iscsc.fr/posts/article-2'
+        }
+    )
+
+
 def test_new_leaf_bundle_article(mock_requests_post):
     new_article.main(["test_resources/leaf_bundle/index.md"])
 

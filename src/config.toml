@@ -16,8 +16,6 @@ capitalizelisttitles = false  # respect list title case; ex with author: ctmbl s
 
 [markup]
   defaultMarkdownHandler = 'goldmark'
-[markup.goldmark.renderer]
-    unsafe = true
 
 [params]
     brand = "iScsc"                       # name of your site - appears in the sidebar

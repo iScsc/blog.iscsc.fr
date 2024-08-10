@@ -2,6 +2,7 @@
 <h1 class="title">{{ .Title }}</h1>
 <ul class="entries">
     {{ $tags_posts := where .Pages "Section" "posts" }}
+    {{ if $tags_posts }}
         <h2 style="text-align: center;">Posts</h3>
         {{ range $tags_posts }}
             <li>
@@ -13,16 +14,19 @@
                 </span>
             </li>
         {{ end }}
+    {{ end }}
 </ul>
 <ul class="iscsc-entries">
     {{ $tags_resources := where .Pages "Section" "resources" }}
+    {{ if $tags_resources }}
         <h2 style="text-align: center;">Resources</h3>
         {{ range $tags_resources }}
-        <li>
-            <span class="title">
-                <a href="{{ .RelPermalink }}">{{ .Title }}</a>
-            </span>
-        </li>
+            <li>
+                <span class="title">
+                    <a href="{{ .RelPermalink }}">{{ .Title }}</a>
+                </span>
+            </li>
         {{ end }}
+    {{ end }}
 </ul>
 {{ end }}

@@ -1,5 +1,4 @@
 ---
-title: "Cyber Security and Hacking stuff"
+title: "Cyber Security and Hacking"
 description: "TODO"
 ---
-

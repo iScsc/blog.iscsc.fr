@@ -1,4 +1,11 @@
 {{ define "main" -}}
+<!--
+  'resources' is a content section
+  I chose to name the template file after the section's name as 'about' and 'projects'
+  in poison: https://github.com/lukeorth/poison/tree/master/layouts
+
+  list of sections template file names: https://gohugo.io/templates/lookup-order/#section-templates
+-->
 
 {{ if .Site.Params.light_dark }}
     {{ partial "light_dark.html" . }}

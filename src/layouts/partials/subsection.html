@@ -1,7 +1,15 @@
-<details>
-<summary class="iscsc-subsection"><a href="{{ .RelPermalink }}">{{ .Title }}</a></summary>
+<div class="iscsc-subsection">
+    <details>
+    <summary><a href="{{ .RelPermalink }}">{{ .Title }}</a></summary>
 
-<!-- Mandatory blank line-->
-<span class="iscsc-description">{{ .Params.description }}</span>
+    <!-- Mandatory blank line -->
+    <!-- <span class="iscsc-description">{{ .Params.description }}</span> -->
 
-</details>
+    {{ with .Sections }}
+        {{ range . }}
+            {{ partial "subsection.html" . }}
+        {{ end }}
+    {{ end }}
+
+    </details>
+</div>

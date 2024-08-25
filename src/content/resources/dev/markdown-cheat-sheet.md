@@ -1,5 +1,5 @@
 ---
 title: "Markdown Cheatsheet"
-summary: "TODO"
+summary: "SImply a markdown cheatsheet, no magic here."
 link: "https://www.markdownguide.org/cheat-sheet/#basic-syntax"
 ---

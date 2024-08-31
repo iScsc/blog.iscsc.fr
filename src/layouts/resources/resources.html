@@ -7,9 +7,6 @@
   list of sections template file names: https://gohugo.io/templates/lookup-order/#section-templates
 -->
 
-{{ if .Site.Params.light_dark }}
-    {{ partial "light_dark.html" . }}
-{{ end }}
 <div class="page">
     <h1 class="page-title">{{ .Title }}</h1>
     <span class="iscsc-description">{{ .Params.description }}</span>

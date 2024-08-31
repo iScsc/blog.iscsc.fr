@@ -1,0 +1,14 @@
+{{ define "main" -}}
+<!--
+  'resource' is a content page
+
+  list of sections template file names: https://gohugo.io/templates/lookup-order/#single-templates
+-->
+
+<div class="page">
+    <h1 class="page-title">{{ .Title }}</h1>
+
+    {{ partial "resource.html" . }}
+
+</div>
+{{ end }}

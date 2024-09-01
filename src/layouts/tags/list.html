@@ -1,0 +1,21 @@
+{{ define "main" -}}
+<!--
+  'tags' is a taxonomy
+  I chose to name the template file 'list.html' as it is the default
+  used for tags in poison
+
+  list of taxonomy template file names: https://gohugo.io/templates/lookup-order/#taxonomy-templates
+  inspired from https://github.com/lukeorth/poison/blob/eaec6fbf03d9ec29605d5787b656919fac10197d/layouts/_default/list.html#L1
+-->
+
+<h1 class="title">{{ .Title }}</h1>
+<ul class="entries">
+    {{ range .Pages.ByTitle }}
+            <li>
+                <span class="title">
+                    <a href="{{ .RelPermalink }}">{{ .Title }}</a>
+                </span>
+            </li>
+    {{ end }}
+</ul>
+{{ end }}

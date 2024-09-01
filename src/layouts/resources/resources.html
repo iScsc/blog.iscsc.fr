@@ -1,0 +1,31 @@
+{{ define "main" -}}
+<!--
+  'resources' is a content section
+  I chose to name the template file after the section's name as 'about' and 'projects'
+  in poison: https://github.com/lukeorth/poison/tree/master/layouts
+
+  list of sections template file names: https://gohugo.io/templates/lookup-order/#section-templates
+-->
+
+<div class="page">
+    <h1 class="page-title">{{ .Title }}</h1>
+    <span class="iscsc-description">{{ .Params.description }}</span>
+
+    {{ with .Sections }}
+        <h2>Sections</h2>
+        {{ range . }}
+            {{ partial "subsection.html" . }}
+        {{ end }}
+    {{ end }}
+
+    {{ with .RegularPages }}
+        <h2>Resources</h2>
+        {{ range . }}
+            {{ partial "resource.html" . }}
+        {{ end }}
+    {{ end }}
+    {{ if (.Site.Params.listmonk) }}
+        {{ partial "post/listmonk_email_newsletters.html" . }}
+    {{ end }}
+</div>
+{{ end }}

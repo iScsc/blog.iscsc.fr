@@ -1,0 +1,49 @@
+.iscsc-subsection {
+    font-size: 1.25rem;
+    margin-bottom: 0.5rem;
+    margin-left: 1em;
+}
+
+.iscsc-description {
+    font-style: italic;
+    font-size: 1rem;
+}
+
+.iscsc-resource {
+    background-color: var(--code-block-background-color); /* Not great... TO BE CHANGED */
+    display: inline-block;
+    /*display: block;*/
+    padding: 0.2rem 0.8rem;
+    border-radius: 0.5em;
+    margin-bottom: 0.8rem;
+}
+
+.iscsc-resource a {
+    font-size: 0.8rem;
+}
+
+.iscsc-summary {
+    font-style: italic;
+    font-size: 0.9rem;
+}
+
+/* stolen from poison: https://github.com/lukeorth/poison/blob/4b36ef57e6834471d946d634f9677971b5acc43e/assets/css/poison.css#L261 */
+.iscsc-entries li {
+    display: flex;
+}
+.iscsc-entries li .title {
+    order: 1;
+}
+.iscsc-entries li .published {
+    order: 3;
+}
+.iscsc-entries li::after {
+    background-image: none;
+    background-position: bottom;
+    background-size: 1ex 3.5px;
+    background-repeat: space no-repeat;
+    content: "";
+    flex-grow: 1;
+    height: 1.1em;
+    order: 2;
+}

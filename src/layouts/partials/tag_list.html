@@ -1,0 +1,8 @@
+<!-- shamelessly stolen from poison: https://github.com/lukeorth/poison/blob/master/layouts/partials/post/info.html#L25-L33 -->
+<ul class="tags">
+    {{ range .Params.tags }}
+        <li class="tag-{{ . }}">
+            <a href='{{ "tags/" | absLangURL }}{{ . | urlize }}'>{{ . }}</a>
+        </li>
+    {{ end }}
+</ul>

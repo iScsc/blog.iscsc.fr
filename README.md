@@ -62,7 +62,7 @@ docker compose up --detach blog
 
 #### Deploy the website itself
 
-Create the blog/prod and blog/dev directory, **they must be writable by the user/group that will write to it: you, builder target, CI user...**
+Create the `./build/blog/prod` and `./build/blog/dev` directory, **they must be writable by the user/group that will write to it: you, builder target, CI user...**
 ```sh
 mkdir -p build/blog/prod
 mkdir -p build/blog/dev
@@ -92,12 +92,15 @@ sudo chmod -R g+w build/blog
 ```
 
 ### Automatic deployment
-The repository contains a GitHub Actions which automatically:
+The repository contains a GitHub Action which automatically:
  1. **builds the website**: allow to check that nothing is broken, publish an artifact which can be downloaded or reused
  2. IF push to main AND `src/*` modified, **deploys the build**: download the artifact, create and setup ssh key, send build to server through ssh (with `rsync`)
 
-This requires a server (a VPS) ready to receive the build *(and to be useful, running a http server serving this build)*, and, of course, to set some mandatory GitHub secrets (ssh key, CI username on server, path,...).
-
+This requires a server ready to receive the build *(to be useful, it must be running an http server serving this build)*, and to set some mandatory GitHub secrets (see [`build_and_deploy.yml`](https://github.com/iScsc/blog.iscsc.fr/blob/main/.github/workflows/build_and_deploy.yml)):
+- `SSH_KNOWN_HOSTS`
+- `PRIVATE_SSH_KEY`
+- `CI_USER_NAME`
+- `REPO_PATH_ON_REMOTE`
 
 Sources I used:
 - [Scott W. Harden's tuto](https://swharden.com/blog/2022-03-20-github-actions-hugo/)

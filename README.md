@@ -1,32 +1,5 @@
 # blog.iscsc.fr: a blog built with HUGO framework
 
-TODO pour cette PR: virer le todo à la fin et mettre les features
-
-
-## TODO
-Non-exhaustive TODO-list:
- - [X] write a workflow that prevents merging if website doesn't build
- - [X] fix nginx.conf and run_nginx.sh properly
- - [X] Add automatic deployment on push to src/**
- - [ ] write a workflow warning if the new content is still draft
- - [X] add https
- - [X] add posts from previous website
- - [ ] add a comments engine
- - [X] fix baseUrl and "iScsc" sidebar brand name not redirecting
- - [ ] print a `lastUpdate` or `updated` date param on posts
- - [X] show posts which `draft` param is `true` in dev mode (if possible)
- - [ ] check when building (with builder target) that git submodule is updated
-
-
-## Features
-- renders emojis https://emojibase.dev/shortcodes/?
-
-## NOTES:
-- possible other choices for themes, other than git submodules: HUGO modules
-  - at least remove useless empty folders
-- hugo docker image: custom image rather than klakegg one's: more control over hugo's version 
-
-
 ## Deployment
 
 ### Production
@@ -128,7 +101,7 @@ This requires a server (a VPS) ready to receive the build *(and to be useful, ru
 
 Sources I used:
 - [Scott W. Harden's tuto](https://swharden.com/blog/2022-03-20-github-actions-hugo/)
-- [HUGO deocumentation](https://gohugo.io/hosting-and-deployment/deployment-with-rsync/)
+- [HUGO documentation](https://gohugo.io/hosting-and-deployment/deployment-with-rsync/)
 - [GitHub Actions documentation](https://docs.github.com/en/actions/learn-github-actions/contexts#steps-context)
 
 ### Development
@@ -144,3 +117,20 @@ hugo server --buildDrafts --buildFuture
 This will build sources and start a basic development server that listens on http://localhost:1313.
 
 The HUGO server **automatically watches sources**, so if you create a new post while it's running it will automatically rebuild the website and serve the new post.
+
+## Features
+
+- articles about various subjects around computer science: security, development, network, linux...
+- numerous useful resources, tools, guides, tutorials that we think are helpful
+- everyone can contribute through GitHub PRs, see our [tutorial](https://iscsc.fr/posts/publish-your-own-post/)
+- renders emojis ([full list](https://gohugo.io/quick-reference/emojis/#smileys--emotion))
+- automatic build and deployment of the website on every merge
+
+
+### Incoming
+
+Incoming features:
+- add an event page
+- add a club members page
+- add a comment engine ([see example on poison repo](https://github.com/lukeorth/poison?tab=readme-ov-file#comments))
+- print a `lastmod` date on posts (see [`lastmod` on HUGO's doc](https://gohugo.io/content-management/front-matter/#lastmod))

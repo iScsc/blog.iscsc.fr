@@ -53,3 +53,8 @@
     font-style: italic;
     font-size: 0.8rem;
 }
+
+.iscsc-event-logo {
+    display: inline-block;
+    max-width: 20rem;
+}

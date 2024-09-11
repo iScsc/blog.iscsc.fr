@@ -8,6 +8,11 @@
         {{ if .Pages }}
             {{ range .Pages }}
                 <h2 class="post-title">{{ .Title }}</h2>
+                {{ if .Params.image }}
+                <p>
+                  <img src="{{.Params.image}}" class="iscsc-event-logo"><br>
+                </p>
+                {{ end }}
                 {{ .Content }}
             {{ end }}
         {{ end }}

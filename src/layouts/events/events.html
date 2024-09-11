@@ -1,18 +1,21 @@
 {{ define "main" -}}
-{{ if .Site.Params.light_dark }}
-    {{ partial "light_dark.html" . }}
-{{ end }}
 <div class="post">
-    {{ with .Site.GetPage "/event" }}
+    {{ with .Site.GetPage "/events" }}
+        <h1 class="post-title">{{ .Title }}</h1>
+        <span class="iscsc-lastmod">updated on {{ .Lastmod | time.Format ":date_medium" }}</span>
+        {{ .Summary }}
+
         {{ if .Pages }}
             {{ range .Pages }}
-                <h1 class="post-title">{{ .Title }}</h1>
+                <h2 class="post-title">{{ .Title }}</h2>
                 {{ .Content }}
             {{ end }}
-        {{ else }}
-            <h1 class="post-title">{{ .Title }}</h1>
-            {{ .Content }}
         {{ end }}
+
+        {{ (replace .Content .Summary "") | safeHTML }}        <!-- VERY HACKY -->
+        <!-- HUGO v0.134 add .ContentWithoutSummary https://gohugo.io/methods/page/contentwithoutsummary/
+        which is better and should be used when updating HUGO-->
+
     {{ end }}
     {{ if (.Site.Params.listmonk) }}
         {{ partial "post/listmonk_email_newsletters.html" . }}

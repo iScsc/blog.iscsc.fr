@@ -47,3 +47,9 @@
     height: 1.1em;
     order: 2;
 }
+
+.iscsc-lastmod {
+    color: gray; /* Not great... TO BE CHANGED */
+    font-style: italic;
+    font-size: 0.8rem;
+}

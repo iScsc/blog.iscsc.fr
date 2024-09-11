@@ -1,5 +1,6 @@
 ---
 title: "UnitedCTF"
+image: "unitedctf-logo.png"
 ---
 
 | Type        | Name        | Date | Details | Links |

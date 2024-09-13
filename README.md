@@ -123,17 +123,17 @@ The HUGO server **automatically watches sources**, so if you create a new post w
 
 ## Features
 
-- articles about various subjects around computer science: security, development, network, linux...
-- numerous useful resources, tools, guides, tutorials that we think are helpful
+- [articles](https://iscsc.fr/posts) about various subjects around computer science: security, development, network, operating systems...
+- numerous useful [resources](https://iscsc.fr/resources), tools, guides, tutorials
+- an [event](https://iscsc.fr/events) page to gather all relevant information about CTFs, conferences, forums...
 - everyone can contribute through GitHub PRs, see our [tutorial](https://iscsc.fr/posts/publish-your-own-post/)
-- renders emojis ([full list](https://gohugo.io/quick-reference/emojis/#smileys--emotion))
+- renders [emojis](https://gohugo.io/quick-reference/emojis/#smileys--emotion)
 - automatic build and deployment of the website on every merge
 
 
 ### Incoming
 
 Incoming features:
-- add an event page
 - add a club members page
 - add a comment engine ([see example on poison repo](https://github.com/lukeorth/poison?tab=readme-ov-file#comments))
 - print a `lastmod` date on posts (see [`lastmod` on HUGO's doc](https://gohugo.io/content-management/front-matter/#lastmod))

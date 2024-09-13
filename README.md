@@ -4,11 +4,18 @@
 
 ### Production
 
-#### Create SSL certification
+### TL;DR
+- create SSL certificates (needed for HTTPS)
+- *create* the build directory with the right permissions
+- *start* the nginx web server with a docker command
+- *build* the website with a docker command
+- enjoy the website!
+
+#### Create SSL certificates
 
 To set up HTTPS, you will need valid SSL certificates. If you deploy the app for the first time, follow these instructions:
 
-- Comment or delete the whole server section about 443 in the `nginx.conf` file.
+- Comment or delete the whole server section about port 443 in the `nginx.conf` file.
 
 ```diff
 - server {
@@ -41,7 +48,7 @@ docker compose down
 
 The certificates should have been generated in `certbot/conf/live/yourdomainname.com/`.
 
-#### Renew SSL certification
+#### Renew SSL certificates
 
 If you just want to renew existing certificates you should use the designed script:
 ```bash
@@ -62,7 +69,7 @@ docker compose up --detach blog
 
 #### Deploy the website itself
 
-Create the `./build/blog/prod` and `./build/blog/dev` directory, **they must be writable by the user/group that will write to it: you, builder target, CI user...**
+- *Create* the `./build/blog/prod` and `./build/blog/dev` directory, **they must be writable by the user/group that will write to it: you, builder target, CI user...**
 ```sh
 mkdir -p build/blog/prod
 mkdir -p build/blog/dev
@@ -70,17 +77,18 @@ sudo chown -R <user>:<group> build/blog
 sudo chmod -R g+w build/blog
 ```
 
-> you should check first the consistency of the server name (iscsc.fr/localhost) in those files: `nginx.conf`, ...
+> you should check first the consistency of the server name (iscsc.fr/localhost) in those files: `nginx.conf`, `docker-compose.yml`, workflows in `.github/workflows` ...
 
-Start the nginx container to serve requests:
+- *Start* the nginx container to serve requests:
 ```sh
 docker compose build blog
 docker compose up --detach blog
 ```
 
-> Note: before the next step make sure that when cloning the repository you also fetched the git submodule!
+> **Note:**  
+> Before the next step make sure that when cloning the repository you also fetched the git submodule!
 
-Then build the static website, `./build/blog/prod` is a volume shared with both containers so building the website will automatically "update" it for nginx.
+- *Build* the static website, `./build/blog/prod` is a volume shared with both containers so building the website will automatically "update" it for nginx.
 ```sh
 docker compose up builder
 ```
@@ -112,10 +120,11 @@ Sources I used:
 > it requires `hugo` [installed](https://gohugo.io/installation/) locally!
 ```sh
 cd src
-hugo server --buildDrafts --buildFuture
+hugo server --buildFuture --buildDrafts --disableFastRender
 ```
-> `--buildFuture` is also used in production, `--buildDrafts` only in development  
-> `--buildExpired` can be used too
+- `--buildFuture` is also used in production, `--buildDrafts` only in development  
+- `--buildExpired` can be used too  
+- `--disableFastRender` will avoid you headaches trying to debug what is really a HUGO cache problem
 
 This will build sources and start a basic development server that listens on http://localhost:1313.
 
@@ -137,3 +146,10 @@ Incoming features:
 - add a club members page
 - add a comment engine ([see example on poison repo](https://github.com/lukeorth/poison?tab=readme-ov-file#comments))
 - print a `lastmod` date on posts (see [`lastmod` on HUGO's doc](https://gohugo.io/content-management/front-matter/#lastmod))
+
+## Contributing
+
+To contribute to the website **code or good-looking** feel free to open an [Issue](https://github.com/iScsc/blog.iscsc.fr/issues/new) for new features, improvements or UX/UI changes, or directly a [Pull Request](https://github.com/iScsc/blog.iscsc.fr/pulls) for bug fixes or typos.
+
+To contribute to the **knowledge** gathered on this website give a look at our [tutorial](https://iscsc.fr/posts/publish-your-own-post/) for new contributors 🙂  
+...or directly open a [Pull Request](https://github.com/iScsc/blog.iscsc.fr/pulls) if you already know how these things work 😉

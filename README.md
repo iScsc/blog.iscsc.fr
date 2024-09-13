@@ -1,5 +1,18 @@
 # blog.iscsc.fr: a blog built with HUGO framework
 
+**Table of content**:
+- [Deployment](#deployment)
+  - [Production](#production)
+    - [TL;DR](#tldr)
+    - [Create SSL certificates](#create-ssl-certificates)
+    - [Renew SSL certificates](#renew-ssl-certificates)
+    - [Deploy the website itself](#deploy-the-website-itself)
+  - [Automatic deployment](#automatic-deployment)
+  - [Development](#development)
+- [Features](#features)
+  - [Incoming fetaures](#incoming)
+- [Contributing](#contributing)
+
 ## Deployment
 
 ### Production

@@ -74,6 +74,8 @@ draft: false
 ```
 These are the mandatory information, please fill in with your information and place it at the very beginning of the file!
 
+To get the date in the right format you can use: `date +%Y-%m-%dT%H:%M:%S%z` (`tldr date` to understand it :wink:)
+
 ## 3- Publish your post!
 You've reached it! The last and final step :slight_smile:
 

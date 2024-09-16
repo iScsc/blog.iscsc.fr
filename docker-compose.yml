@@ -1,6 +1,6 @@
 services:
   builder:
-    image: floryn90/hugo:0.123.7
+    image: floryn90/hugo:0.134.2
     command: --logLevel info --baseURL="https://iscsc.fr" --buildFuture
     environment:
       - HUGO_DESTINATION=/build/blog

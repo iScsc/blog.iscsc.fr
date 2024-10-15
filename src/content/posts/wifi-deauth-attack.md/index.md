@@ -131,8 +131,6 @@ De-authentication works most of the time but immediate re-authentication doesn't
 Indeed, Mac OS does not reconnect immediatly to previously reconnected Network after WiFi card unplanned restart.
 Windows OS doesn't follow the rule and try to reconnect instantly (prefer Windows station to attack if you have the choice :wink:)
 
-> very interesting,  source on this part  ?
-
 Then, if it works stop the listening we have what we want by Ctrl+C over listening terminal.
 
 ## Step 6: Retreiving WiFi password

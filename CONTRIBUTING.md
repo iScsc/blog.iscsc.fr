@@ -20,16 +20,16 @@ Tags:
 - [Non-English]\: Add an upper case tag for the language, for example `FR` for French
 
 Title:
-- Title should be straight to the point and explicit
-- [Non-English]\: Add a flag [emoji](https://gohugo.io/quick-reference/emojis/#country-flag) for the language at the end of the title
+- Title should be **straight to the point and explicit**
+- [Non-English]\: Add an [emoji](https://gohugo.io/quick-reference/emojis/#country-flag) flag for the language at the end
 - [Write-Ups]\: End title with `Write-Up <CTF> <YEAR>`
 
 Files:
 - Use **lower-case, dash-separated names**
-- Filenames will become URLs so should be **explicit, relatively short and close to article's title**
+- Filenames will become URLs, they should be **explicit, relatively short and close to article's title**
 - In case you have images: create a folder, place your article inside and name it `index.md`, an [example](https://github.com/iScsc/blog.iscsc.fr/tree/main/src/content/posts/publish-your-own-post)  
   *NOTE: called [leaf bundle](https://gohugo.io/content-management/page-bundles/#leaf-bundles) by HUGO*
-- [Write-Ups]\: `name-of-challenge-wu<(optional)-category>.md`
+- [Write-Ups]\: Name the file `name-of-challenge-wu-<category>.md` (the category is optional)
 
 Other:
 - check emojis on https://gohugo.io/quick-reference/emojis/

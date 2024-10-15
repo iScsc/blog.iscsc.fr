@@ -1,8 +1,8 @@
 ---
-title: "Hacking WiFi with De-Authentication Attack"
-summary: "In this article, we will demonstrate how to perform a basic WiFi attack with `aircrack-ng` by forcing client deauthentication, retrieving the password hash and finally bruteforcing the password."
+title: "Hack into WiFi networks with a De-Authentication attack"
+summary: "In this article, we will demonstrate how to perform a basic WiFi attack with `aircrack-ng` by forcing a client to de-authenticate, retrieving the password hash, and finally bruteforcing the password."
 date: 2024-06-03T20:00:00+0200
-lastUpdate: 2024-07-14T13:45:06+0200
+lastUpdate: 2024-10-15T13:45:06+0200
 tags: ["hacking", "wifi", "network", "bruteforce"]
 author: clementS
 draft: false

@@ -1,6 +1,6 @@
 ---
 title: "4-Way Handshake - Wifi Authentication"
-summary: "In this article, you will learn how authentitcation works for WPA/WPA2 network"
+summary: "In this article, you will learn how authentication works in WPA/WPA2 based networks"
 date: 2024-10-10T20:00:00+0200
 lastUpdate: 2024-10-10T20:00:00+0200
 tags: ["network", "wifi"]
@@ -9,7 +9,7 @@ draft: false
 ---
 
 ## Abstract
-To connect to a WiFi network, the authentication depends on the WiFi protocol. The most common protocols currently in use are 
+To connect to a WiFi network, the authentication depends on security protocols, the most common of which are: 
 1. **WEP**
 2. **WPA Personal**
 3. **WPA Entreprise**
@@ -19,18 +19,21 @@ To connect to a WiFi network, the authentication depends on the WiFi protocol. T
 
 > There are 2 different versions of WPA and WPA2 which work slightly differently in terms of authentication.
 
-While WEP and WPA3 have their own authentication protocols, WPA and WPA2 (which are the most common ones) use the **4-Way Handshake** method to allow a device to connect to WiFi and secure connection.
+While WEP and WPA3 have their own authentication protocols, WPA and WPA (the most common ones nowadays) use the **4-Way Handshake** method to allow a device to connect to WiFi and secure connection.
 
 The 4-Way Handshake requires a PMK (Pair Master Key), a secret shared by both sides (client and server).
-This can be a password (network key) or a username + password as it's the case for Enterprise authentication.
+This can be a password (network key) or a username + password in the case of Enterprise authentication.
 
-In this article, you will learn how this method works from a network-oriented approach.
+In this article, you will learn how this method works from a network-oriented point of view.
 
 ## Configuration
-We will consider a WPA-Personal/WPA2-Personal WiFi, so the PMK will just be the WiFi password encrypted. We will go into further explains soon.  
+We will consider a WPA-Personal/WPA2-Personal WiFi, so the PMK will just be the WiFi password encrypted. We will dive in further explanations shortly.  
 
 But remember that except getting PMK before authentication starts threw a WiFi password(secret shared by both sides), WPA2-Entreprise and WPA-Entreprise works the same way.
+They use an external RADIUS authentication server with personal user informations and not a global shared key.
 Indeed, they use 4-way handshake to secure communication.  
+
+Lets consider the following situation:
 
 There is a device that knows the key (password) and wants to connect to a WPA/WPA2-PSK WiFi network.
 
@@ -46,7 +49,7 @@ The device sends an authentication request to the network.
 This diagram shows the different requests and what they contain.
 
 > Note: *"STA" stands for Station, and "AP" for Access Point*  
-
+> The device is actually the station and the access point is the network node handling authentication
 
 ## First Request
 Firstly, the AP sends a nonce, which is a large random integer.

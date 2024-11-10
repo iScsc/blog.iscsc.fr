@@ -19,7 +19,7 @@ To connect to a WiFi network, the authentication depends on security protocols, 
 
 > There are 2 different versions of WPA and WPA2 which work slightly differently in terms of authentication.
 
-While WEP and WPA3 have their own authentication protocols, WPA and WPA (the most common ones nowadays) use the **4-Way Handshake** method to allow a device to connect to WiFi and secure connection.
+While WEP and WPA3 have their own authentication protocols, WPA and WPA 2 (the most common ones nowadays) use the **4-Way Handshake** method to allow a device to connect to WiFi and secure connection.
 
 The 4-Way Handshake requires a PMK (Pair Master Key), a secret shared by both sides (client and server).
 This can be a password (network key) or a username + password in the case of Enterprise authentication.
@@ -75,8 +75,14 @@ To get the PSK, the device only needs the BSSID (network MAC address) and the pa
 
 Now, we have the PSK (the AP also performs this operation).
 
-**The PSK is calculated before authentication starts (the station has all infos it needs).**
-*Indeed, you selected a network to connect to (BSSID) and enter password*  
+**The PSK is calculated before authentication starts (the station has all infos it needs: password & BSSID).**  
+*Indeed, you selected a network to connect to (BSSID) and enter password.  
+Even if "How the station list all available network(network name & network MAC address) ?" could definitely an entire article, here is how does it mainly works:*  
+
+*The station send a 'Broadcast' unencrypted network packet "Is there any available network ?". A Broadcast packet is a packet that everyone are allowed to read.*  
+*Finally every access point reply: "I'm here", and their BSSID is included in their network packet header.*  
+
+
 **The PMK is exactly the same as PSK for both WPA-Personal and WPA2-Personal**
 
 **VERY IMPORTANT**
@@ -158,7 +164,10 @@ In WPA2-PSK and WPA-PSK, the PMK is the same as the PSK.
 
 ## Conclusion
 Remember that even if we use WPA/WPA2, if a hacker catch all packets (this can be done easily with Wireshark), he can brutforce PTK and get WiFi.  
-Indeed, he has all infos he needs (both nonces, BSSID, protocols...).
+Indeed, he has all infos he needs (both nonces, BSSID, protocols...).  
+
+*Wireshark is just a tool to capture traffic using pcap (an network capture API).*  
+
 
 You learned how the 4-way handshake works.
 Now you can discover the way to get PMK for WPA(2)-Entreprise.

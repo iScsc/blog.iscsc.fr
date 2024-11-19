@@ -29,7 +29,7 @@ In this article, you will learn how this method works from a network-oriented po
 ## Configuration
 We will consider a WPA-Personal/WPA2-Personal WiFi, so the PMK will just be the WiFi password encrypted. We will dive in further explanations shortly.  
 
-But remember that except getting PMK before authentication starts threw a WiFi password(secret shared by both sides), WPA2-Entreprise and WPA-Entreprise works the same way.
+But remember that except getting PMK before authentication starts through a WiFi password(secret shared by both sides), WPA2-Entreprise and WPA-Entreprise works the same way.
 They use an external RADIUS authentication server with personal user informations and not a global shared key.
 Indeed, they use 4-way handshake to secure communication.  
 
@@ -147,7 +147,7 @@ The station sends an acknowledgment packet to tell the AP that everything is OK.
 ## Encryption
 WPA2 uses **AES** while WPA uses **TKIP** to encrypt packet content.
 Even if both are encryption's methods, AES is more secure (because it uses longer encryption keys).
-This makes it impossible for an hacker to read a captured packet.
+This makes it nearly impossible for an hacker to read a captured packet.
 
 The PTK contains several keys.  
 Several keys are derived from the PTK:

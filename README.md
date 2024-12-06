@@ -162,7 +162,12 @@ Incoming features:
 
 ## Contributing
 
-To contribute to the website **code or good-looking** feel free to open an [Issue](https://github.com/iScsc/blog.iscsc.fr/issues/new) for new features, improvements or UX/UI changes, or directly a [Pull Request](https://github.com/iScsc/blog.iscsc.fr/pulls) for bug fixes or typos.
+*See [CONTRIBUTING.md](./CONTRIBUTING.md) for a complete guide to contributing and guidelines.*
 
-To contribute to the **knowledge** gathered on this website give a look at our [tutorial](https://iscsc.fr/posts/publish-your-own-post/) for new contributors 🙂  
+To contribute to the website with **new features, improvements or UX/UI changes** feel free to open an [Issue](https://github.com/iScsc/blog.iscsc.fr/issues/new).  
+You can **fix bugs or typos** by submiting a [Pull Request](https://github.com/iScsc/blog.iscsc.fr/pulls).
+
+To **add or update content** gathered on this website give a look at our [tutorial](https://iscsc.fr/posts/publish-your-own-post/) for new contributors 🙂  
 ...or directly open a [Pull Request](https://github.com/iScsc/blog.iscsc.fr/pulls) if you already know how these things work 😉
+
+Content is placed under [`./src/content`](https://github.com/iScsc/blog.iscsc.fr/tree/main/src/content).

@@ -17,7 +17,8 @@ To achieve this we must:
 1) Detect the target WiFi's signal
 2) Detect connected computer to this WiFi
 3) Send de-authentication packets to this computer to make it disconnect from the WiFi
-4) Get the password "hash" when it tries to reconnect to WiFi
+4) Get the MIC (Message Integrity Code) which is a **hash** of several knownable informations included in the network capture and **password**  
+See the **4-Way Handshake** [article](https://iscsc.fr/posts/4-way-handshake/) for more informations
 5) Bruteforce it :)
 
 ## Network Packet Structure
